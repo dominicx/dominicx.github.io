@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head>
+  <meta charset="utf-8">
+  <title>PHPMailer类发送中文邮件兼谈解决XOOPS中文发送邮件乱码</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="PHP,XOOPS,PHPMailer类发送中文邮件兼谈解决XOOPS中文发送邮件乱码">
+  <meta name="description" content="xoops.org.cn论坛上又有人问xoops发送中文邮件乱码的问题。domecc给出了一个临时办法，还提供一个网址http://www.thedevlog.com/dev/log-29.html来对utf8编码系统做修正。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Dominic.Xu&#039;s 博客">
+  <meta name="og:image" content="http://xuplus.com/image/logo.png">
+  <meta name="og:title" content="PHPMailer类发送中文邮件兼谈解决XOOPS中文发送邮件乱码">
+  <meta name="og:url" content="http://xuplus.com//article/2007/08/a57.html">
+  <meta name="og:description" content="xoops.org.cn论坛上又有人问xoops发送中文邮件乱码的问题。domecc给出了一个临时办法，还提供一个网址http://www.thedevlog.com/dev/log-29.html来对utf8编码系统做修正。">
+
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://xuplus.com/article/2007/08/a57.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Dominic.Xu&#039;s 博客">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- header -->
+  <header>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/aboutme/" class="main-nav">关于</a></li>
+        </ul>
+        <!-- search input -->
+        
+
+<!-- 百度站内搜索（已通过站点验证） -->
+<form class="navbar-form navbar-left" role="search"
+  action="//search.xuplus.com/cse/search">
+  <div class="form-group search">
+    <input type="text" name="q" id="bdcsMain" class="form-control primary" aria-label="..." placeholder="搜索">
+    <input type="hidden" name="s" value="16003826112187889004">
+    <input type="hidden" name="nsid" value="0">
+
+  </div>
+</form>
+
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </div>
+
+    <script>
+        <!-- mobile -->
+    	$('.navbar-toggle').sidr({
+	      name: 'sidr-main',
+	      source: '#bs-example-navbar-collapse-1'
+	    });
+    	$('body').click(function(){
+    	  $.sidr('close', 'sidr-main');
+    	});
+    	
+    	$(".navbar-fixed-top").autoHidingNavbar({
+    	  // see next for specifications
+    	});
+    </script>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+    
+    <article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/PHP/">PHP</a><a class="category-item" href="/categories/PHP/XOOPS/">XOOPS</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name">PHPMailer类发送中文邮件兼谈解决XOOPS中文发送邮件乱码</h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2007-08-07T05:25:41.000Z" itemprop="datePublished"><time datetime="2007-08-07T05:25:41.000Z">2007-08-07</time></time>
+      </span>
+      <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/PHP/">PHP</a><a class="tag-item" href="/tags/XOOPS/">XOOPS</a></span>
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" data-thread-key="09a2a8021d8e846fc050ef68c0b6dcb5"></span><!-- <span class="hidden-xs">评论</span> --></a>
+        <a href="#like" class="icon nova-heart2-full"><span class="count"></span><span class="hidden-xs">喜欢</span></a>
+        <a href="#" class="icon nova-eye"><span class="count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+  </header>
+  <div class="article-content" itemprop="articleBody" id="post-content">
+    <p>xoops.org.cn论坛上又有人问xoops发送中文邮件乱码的问题。domecc给出了一个临时办法，还提供一个网址<a href="http://www.thedevlog.com/dev/log-29.html" title="http://www.thedevlog.com/dev/log-29.html" target="_blank" rel="external">http://www.thedevlog.com/dev/log-29.html</a>来对utf8编码系统做修正。</p>
+<p>其实PHPMailer已经是非常成熟的PHP类了（当然需要打上前一段时间出现的bug的补丁），对于邮件头和邮件体的编码处理已经非常好了，<a href="http://www.thedevlog.com/dev/log-29.html" title="http://www.thedevlog.com/dev/log-29.html" target="_blank" rel="external">http://www.thedevlog.com/dev/log-29.html<font color="#333333">中提到修改EncodeHeader</font></a>并编码，实际上EncodeHeader后面的代码就是完成将头部编码的功能，所以不需要修改该函数。</p>
+<p>要成功实现发送中文邮件，设置phpmailer类两个值即可。</p>
+<blockquote>
+<p>$mail = new PHPMailer();</p>
+<p>$mail-&gt;CharSet = “UTF-8”; // 设置字符集编码，GB2312 GBK</p>
+<p>$mail-&gt;Encoding = “base64”;//设置文本编码方式</p>
+<p>……<br>这样保证了邮件标题和正文内容全部不会乱码，当然邮件内容的字符集需要和给定的CharSet内容一致。</p>
+</blockquote>
+<p>回过头来看看xoops中为什么邮件乱码，在xoops中发送邮件首先我们使用了具体语言的xoopsmailerlocal.php文件中XoopsMailerLocal类，而XoopsMailerLocal类继承自class\xoopsmailer.php中的XoopsMailer类，而XoopsMailer类的multimailer成员指向自class\mail\xoopsmultimailer.php中的XoopsMultiMailer类的实体，XoopsMultiMailer类是从PHPMailer派生的。</p>
+<p>问题就出在XoopsMailer的构造函数上。在XoopsMultiMailer类的构造函数中（xoopsmultimailer.php中177行）指定了CharSet值为strtolower( _CHARSET )，这样做本来在绝大多数邮件系统中均不会出现乱码，但在XoopsMailer类的sendMail方法（xoopsmailer.php中378行）却重新指定了字符集和文本编码方式：</p>
+<blockquote>
+<p>$this-&gt;multimailer-&gt;CharSet = $this-&gt;charSet;</p>
+<pre><code>$this-&amp;gt;multimailer-&amp;gt;Encoding = $this-&amp;gt;encoding;
+</code></pre><p>这样导致前面在构造multimailer的时候指定了字符集为XOOPS系统字符集strtolower( _CHARSET )（utf-8或者gb2312），到sendMail方法中却换成了XoopsMailer的成员charSet的值，而XoopsMailer的构造函数并没有让charSet随系统变化，而是取默认值：iso-8859-1。邮件客户端收到邮件按照iso-8859-1来显示邮件内容当然会乱码。所以我们只要正确的给XoopsMailer类实体赋给正确字符集（_CHARSET）即可。</p>
+</blockquote>
+<p>解决办法是：</p>
+<blockquote>
+<p>打开htdocs\class\xoopsmailer.php ，137行附近</p>
+<p>$this-&gt;multimailer = new XoopsMultiMailer();</p>
+<p>$this-&gt;reset();</p>
+<p>后面添加一行：</p>
+<p>$this-&gt;charSet = strtolower( _CHARSET );</p>
+<p>$this-&gt;encoding = ‘base64’;<br>更完美的解决办法是：<br>打开htdocs\language\schinese\xoopsmailerlocal.php和htdocs\language\schinese_utf8\xoopsmailerlocal.php 修改为：</p>
+<p>&lt;?php</p>
+<p>class XoopsMailerLocal extends XoopsMailer {</p>
+<pre><code>function XoopsMailerLocal(){
+
+    $this-&amp;gt;XoopsMailer();
+
+    $this-&amp;gt;charSet = strtolower( _CHARSET );
+
+    $this-&amp;gt;encoding = &apos;base64&apos;;
+
+}
+</code></pre><p>}</p>
+<p>?&gt;<br>实则是xoops 中文版bug。</p>
+</blockquote>
+<p>另外，为什么要指定encoding呢，这里涉及到email的原理，email产生的年代用7bit就足够表示所有ASCII字符可打印字符了，email发展到全世界之后，多字节语种的需要，需要使用8bit或者16bit或者更多bit来表示一个完整的字，但老式的网络设备和一些邮件系统并不能很好的处理不是7bit的内容或者并不能很好处理多字节的文本内容，这样就需要将文本做一个编码，base64和quoted-printable便是email中用来解决这个问题的最流行方法。email中附件都是用base64来编码具体内容的，用base64编码之后的邮件除非文本内容和指定字符集不一致或者本身就是乱码，否则不会出现乱码的。</p>
+<p>当时给ceiea做Windows下邮件系统时候对email做了全面的分析，还是有些用处的。</p>
+<p>[tags]PHPMailer,中文,邮件,XOOPS[/tags]</p>
+
+  </div>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2016-09-28T06:31:18.394Z" itemprop="dateModified">
+        最后更新： <span class="red-text">2016-09-28</span>
+    </time>
+    
+  <!-- JiaThis Button BEGIN -->
+  <div class="jiathis_style clearfix"><a id="share" href="#share"></a>
+      <span class="jiathis_txt icon nova-share">分享：</span>
+      <a class="jiathis_button_tsina">微博</a>
+      <a class="jiathis_button_weixin">微信</a>
+      <a class="jiathis_button_twitter">推特</a>
+      <a class="jiathis_button_copy">复制网址</a>
+      <a class="jiathis_button_ishare">一键分享</a>
+      <a href="http://www.jiathis.com/share?uid=2115061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<!--       <a class="jiathis_counter_style"></a> -->
+  </div>
+  <!-- JiaThis Button END -->
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2115061" charset="utf-8" async="async"></script>
+
+  </footer>
+  <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+    <meta content="http://xuplus.com" itemprop="url">
+    <meta content="Dominic.Xu&#039;s 博客" itemprop="name">
+    <meta content="/image/logo.png" itemprop="logo">
+  </span>
+</article>
+<div>
+  <nav><ul class="pager"><li class="previous"><a href="/article/2007/08/a58.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">通货膨胀良言</span></a></li><li class="next"><a href="/article/2007/08/a56.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">[Hack]将artile模组中的文章的关键词加入到HTML的Meta头中</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal"><img src="/image/donate_button.png">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">打赏</h4>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <a name="comment"></a>
+
+<!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="09a2a8021d8e846fc050ef68c0b6dcb5" data-title="PHPMailer类发送中文邮件兼谈解决XOOPS中文发送邮件乱码" data-url="http://xuplus.com//article/2007/08/a57.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xuplus"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+    
+  </div>
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+    </aside>
+  </div>
+</div>
+</div>
+  <!-- footer -->
+  <footer id="footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2007-2016 <a href="http://xuplus.com/" target="_blank">Dominic Xu</a> Powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <br/><br/>
+    </div>
+    <div>
+      <a href="http://www.miitbeian.gov.cn" target="_blank"></a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab" style="bottom: 45px; right: 24px;">
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="http://www.jiathis.com/share?uid=2115061" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+  </div>
+  <!-- after footer, some 3rd script place here -->
+    <script type="text/javascript">
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+    
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script type="text/javascript">
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=16003826112187889004' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+    
+<!-- LeanClound官方Javascript SDK -->
+<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script>
+  AV.init({
+    appId : 'sOAoHgViAW1ueMP6mQALndLv-gzGzoHsz',
+    appKey : 'XUI7wYifGxcGQQQY6WWLuaig'
+  });
+
+  var lc_config = {
+    pageId : '09a2a8021d8e846fc050ef68c0b6dcb5',
+    url : 'http://xuplus.com//article/2007/08/a57.html' || '/article/2007/08/a57.html',
+    title : 'PHPMailer类发送中文邮件兼谈解决XOOPS中文发送邮件乱码'
+  };
+  
+  var lc_table = 'Counter' || 'Counter';
+
+  (function() {
+    var query = new AV.Query(lc_table);
+    query.select(['-ACL']);
+    query.equalTo('pageId', lc_config.pageId);
+    query.first({
+      success: function(results) {
+        // results is an array of AV.Object.
+        if (typeof results === 'undefined') {
+          insert(results);
+          return;
+        }
+        console.log(results._serverData);
+        update(results);
+        show(results);
+      },
+      error: function(error) {
+        // error is an instance of AV.Error.
+        console.log(error);
+      }
+    });
+
+    function insert(data) {
+      if (!data) {
+        console.log('data is null new object');
+        var M = AV.Object.extend(lc_table);
+        data = new M();
+        data.set('views', 1);
+      }
+      for ( var key in lc_config) {
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log('created objectId is ' + data.id);
+      }, function(error) {
+        console.log("create object failed");
+        console.log(error);
+      });
+    }
+
+    function update(data) {
+      data.increment('views', 1);
+      for ( var key in lc_config) {
+        if (key !== 'pageId')
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log("update to " + data.get('views'));
+      }, function(error) {
+        console.log("update object failed");
+        console.log(error);
+      });
+    }
+    
+    function show(data) {
+      $(".post-share .nova-eye .count").html(data.get('views'));
+    }
+  })();
+</script>
+
+</body>
+</html>

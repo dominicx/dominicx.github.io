@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head>
+  <meta charset="utf-8">
+  <title>国产GIS平台选型</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="工作,GIS,SuperMap,超图,选型,国产GIS平台选型">
+  <meta name="description" content="注：本文是在合肥恒卓做GIS平台选型工作时的工作过程文档。
+
+&nbsp;">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Dominic.Xu&#039;s 博客">
+  <meta name="og:image" content="http://xuplus.com/image/logo.png">
+  <meta name="og:title" content="国产GIS平台选型">
+  <meta name="og:url" content="http://xuplus.com//article/2007/07/a41.html">
+  <meta name="og:description" content="注：本文是在合肥恒卓做GIS平台选型工作时的工作过程文档。
+
+&nbsp;">
+
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://xuplus.com/article/2007/07/a41.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Dominic.Xu&#039;s 博客">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- header -->
+  <header>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/aboutme/" class="main-nav">关于</a></li>
+        </ul>
+        <!-- search input -->
+        
+
+<!-- 百度站内搜索（已通过站点验证） -->
+<form class="navbar-form navbar-left" role="search"
+  action="//search.xuplus.com/cse/search">
+  <div class="form-group search">
+    <input type="text" name="q" id="bdcsMain" class="form-control primary" aria-label="..." placeholder="搜索">
+    <input type="hidden" name="s" value="16003826112187889004">
+    <input type="hidden" name="nsid" value="0">
+
+  </div>
+</form>
+
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </div>
+
+    <script>
+        <!-- mobile -->
+    	$('.navbar-toggle').sidr({
+	      name: 'sidr-main',
+	      source: '#bs-example-navbar-collapse-1'
+	    });
+    	$('body').click(function(){
+    	  $.sidr('close', 'sidr-main');
+    	});
+    	
+    	$(".navbar-fixed-top").autoHidingNavbar({
+    	  // see next for specifications
+    	});
+    </script>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+    
+    <article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/工作/">工作</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name">国产GIS平台选型</h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2007-07-25T01:40:17.000Z" itemprop="datePublished"><time datetime="2007-07-25T01:40:17.000Z">2007-07-25</time></time>
+      </span>
+      <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/GIS/">GIS</a><a class="tag-item" href="/tags/SuperMap/">SuperMap</a><a class="tag-item" href="/tags/工作/">工作</a><a class="tag-item" href="/tags/超图/">超图</a><a class="tag-item" href="/tags/选型/">选型</a></span>
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" data-thread-key="978d197a60edad5b67dba18fa9658dfc"></span><!-- <span class="hidden-xs">评论</span> --></a>
+        <a href="#like" class="icon nova-heart2-full"><span class="count"></span><span class="hidden-xs">喜欢</span></a>
+        <a href="#" class="icon nova-eye"><span class="count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+  </header>
+  <div class="article-content" itemprop="articleBody" id="post-content">
+    <font color="#ff0000">注：本文是在合肥恒卓做GIS平台选型工作时的工作过程文档。</font>
+
+<p>&nbsp;</p>
+<font size="4"><span>国产</span><span><font face="Calibri">GIS</font></span></font><span><font size="4">平台选型</font> </span><span><br><br>## <span><span><font face="Cambria">1.</font><span>     </span></span></span><span>背景</span><br><br>合肥供电公司通信所的通信网管理系统最近准备升级改造，原来其中有部分图形化功能是基于<span><font face="Calibri">MapInfo</font></span><span>开发，这次升级将整合通信网监控、通信巡检等系统，一个好的</span><span><font face="Calibri">GIS</font></span><span>平台将奠定通信网一体化管理系统开发工作是否能够顺利进行，因此，我们从互联网上寻找了</span><span><font face="Calibri">10</font></span><span>家国产</span><span><font face="Calibri">GIS</font></span><span>平台提供商，逐家电话联系了解具体情况，选择了</span><span><font face="Calibri">6</font></span><span>家公司做了选型对比。<br><br>## <span><span><font face="Cambria">2.</font><span>     </span></span></span><span>对象</span><br><br>针对目前市场上存在的一些</span><br><br></span><span><font face="Calibri">GIS</font></span><span>平台，我们选择了几款应用广泛的</span><span><font face="Calibri">GIS</font></span><span>平台做了比较，分别是</span><span><font face="Calibri">SuperMap</font></span><span>、</span><span><font face="Calibri">MapGIS</font></span><span>、</span><span><font face="Calibri">GeoStar</font></span><span>、</span><span><font face="Calibri">VRMap</font></span><span>、</span><span><font face="Calibri">MapEngine</font></span><span>、</span><span><font face="Calibri">Grow</font></span><span>。这些平台目前均在国内有很好的成功应用案例，代表国内主流</span><span><font face="Calibri">GIS</font></span><span>平台和应用。其提供厂家分别是：</span><span></span><span><br><table unselectable="on" border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable"><br><tr><br><td width="139" valign="top">平台</td><br><td width="402" valign="top">厂家</td><br><td width="170" valign="top">备注</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">SuperMap </font></td><br><td width="402" valign="top">北京超图地理信息技术有限公司</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapGIS </font></td><br><td width="402" valign="top">武汉中地数码集团公司</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">GeoStar </font></td><br><td width="402" valign="top">武汉武大吉奥信息工程技术有限公司</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">VRMap </font></td><br><td width="402" valign="top">北京灵图软件技术有限公司</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapEngine </font></td><br><td width="402" valign="top">北京朝夕科技有限责任公司</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">Grow </font></td><br><td width="402" valign="top">深圳市雅都图形软件股份有限公司</td><br><td width="170" valign="top"> </td><br></tr><br></table><br><br>## <span><span><font face="Cambria">3.</font><span>     </span></span></span><span>平台对比</span><br><br>针对选择的<span><font face="Calibri">6</font></span><span>款平台我们分别在专业背景、产品特点、多图层支持、数据库支持、二次开发难度、产品及报价、电力行业成功案例七个方面对他们做了比较分析，以其做出适用于我们项目的</span><span><font face="Calibri">GIS</font></span><span>平台选型。<br><br>### <span><span><font size="5" face="Calibri">3.1.</font><span>  </span></span></span><span><font size="5">专业背景</font></span><br><br><font face="Calibri">GIS</font></span><br><br></span><span>平台的开发需要耗费大量的资金、经过长期研发，一般公司不足以支撑完整的</span><span><font face="Calibri">GIS</font></span><span>平台的发展，目前国内比较成熟的</span><span><font face="Calibri">GIS</font></span><span>厂商均是在研究机构、院校的基础上发展起来的。是否拥有专业背景是考量</span><span><font face="Calibri">GIS</font></span><span>平台指标之一。 </span><span><br><table unselectable="on" border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable"><br><tr><br><td width="139" valign="top">平台</td><br><td width="402" valign="top">专业背景</td><br><td width="170" valign="top">备注</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">SuperMap</font></td><br><td width="402" valign="top">中国科学院地理科学与资源研究所</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapGIS </font></td><br><td width="402" valign="top">中国地质大学</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">GeoStar </font></td><br><td width="402" valign="top">武汉大学测绘遥感国家重点实验室</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">VRMap </font></td><br><td width="402" valign="top"> </td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapEngine </font></td><br><td width="402" valign="top"> </td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">Grow </font></td><br><td width="402" valign="top"> </td><br><td width="170" valign="top"> </td><br></tr><br></table><br>基于专业背景的考虑，我们应该优先考虑</span><span><font face="Calibri">SuperMap</font></span><span>、</span><span><font face="Calibri">MapGIS</font></span><span>和</span><span><font face="Calibri">GeoStar</font></span><span>。 </span><span><br><br>### <span><span><font size="5" face="Calibri">3.2.</font><span>  </span></span></span><span><font size="5">产品特点</font></span><br><br>这些平台在具有一般功能之外各自有的特色。<br><table unselectable="on" border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable"><br><tr><br><td width="139" valign="top">平台</td><br><td width="473" valign="top">产品特点</td><br><td width="99" valign="top">备注</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">SuperMap </font></td><br><td width="473" valign="top">空间信息的发布<span><font face="Calibri"><br></font></span><span>空间信息服务的发布</span><span><br></span><span>空间信息的在线编辑</span><span><br></span><span>远程管理</span><span><font face="Calibri"> GIS </font></span><span>服务</span><span><br></span><span>支持</span><span><font face="Calibri"> OGC </font></span><span>的服务规范<br></span><span>最佳路径分析</span><span><br></span><span>用户自定义图层 </span></td><br><td width="99" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapGIS </font></td><br><td width="473" valign="top">集地图输入、数据库管理及空间数据分析为一体的空间信息系统。具有海量地图库管理能力，能管理数万幅图件；完备的空间分析、网络分析、图像分析功能；高效的专业数据库、多媒体数据库管理能力。</td><br><td width="99" valign="top">海量数据处理速度突出 <font face="Calibri">Web</font><span>信息发布支持不够 </span></td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">GeoStar</font></td><br><td width="473" valign="top">重建和还原地形、地貌及地物，真实再现地面景观<br><span>视图的缩放、平移、视点变换、角度旋转、实时</span><span><font face="Calibri">3D</font></span><span>大范围飞行浏览</span><span><font face="Calibri"><br></font></span><span>全方位的场景要素控制</span><span><font face="Calibri"><br></font></span><span>三维物体表面贴图</span><span><font face="Calibri"><br></font></span><span>色彩调配、明暗变换</span><span><font face="Calibri"><br></font></span><span>地形查询与分析</span><span><font face="Calibri"><br></font></span><span>叠加三维模型数据，并进行实时显示和查询</span><span><font face="Calibri"><br></font></span><span>海量文件系统和数据库系统</span><span><font face="Calibri">DEM</font></span><span>、</span><span><font face="Calibri">DOM</font></span><span>、三维模型数据的浏览 </span></td><br><td width="99" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">VRMap</font></td><br><td width="473" valign="top">三维地理信息系统平台软件，可以在三维地理信息系统与虚拟现实领域提供从底层引擎到专业应用的全面解决方案。</td><br><td width="99" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapEngine</font></td><br><td width="473" valign="top">空间和属性数据一体化存储<span><br></span><span>多点并发编辑</span><span><br></span><span>数据缓存技术</span><span><br></span><span>高性能图形显示 </span></td><br><td width="99" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">Grow</font></td><br><td width="473" valign="top">海量数据处理<span><br></span><span>三维数据处理</span><span><br></span><span>协同工作环境</span><span><br></span><span>多级分布式结构<br></span><span>全生命周期状态管理技术<br></span><span><font face="Calibri">WEB</font></span><span>服务器均衡调度</span><span><br></span><span>安全性管理</span><span><br></span><span>浮动用户管理 </span></td><br><td width="99" valign="top"> </td><br></tr><br></table><br>从我们现在基于<span><font face="Calibri">B/S</font></span><span>开发通信网管理系统来说</span><span><font face="Calibri">Grow</font></span><span>的平台最容易集成，其基于</span><span><font face="Calibri">Web Services</font></span><span>接口可以非常方便我们在平台上开发新的应用，而且其基于电力行业的解决方案“图形化电网综合信息管理系统</span><span><font face="Calibri">EFGIS</font></span><span>”也满足我们迁移</span><span><font face="Calibri">MapInfo</font></span><span>中的内容。<br><br>### <span><span><font size="5" face="Calibri">3.3.</font><span>  </span></span></span><span><font size="5">多图层支持</font></span><br><br>以上六款软件均可以支持多图层，且</span><br><br></span><span><font face="Calibri">GeoStar</font></span><span>、</span><span><font face="Calibri">VRMap</font></span><span>、</span><span><font face="Calibri">Grow</font></span><span>均有不错的三维图像表现。 </span><span><br><br>### <span><span><font size="5" face="Calibri">3.4.</font><span>  </span></span></span><span><font size="5">数据库支持</font></span><br><br>在数据库支持方面，他们各有不同。<br><table unselectable="on" border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable"><br><tr><br><td width="139" valign="top">平台</td><br><td width="402" valign="top">数据库支持</td><br><td width="170" valign="top">备注</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">SuperMap </font></td><br><td width="402" valign="top">使用专有<span><font face="Calibri">SDX+</font></span><span>引擎，支持</span><span><font face="Calibri">Oracle</font></span><span>、</span><span><font face="Calibri">SQL Server</font></span><span>、</span><span><font face="Calibri">DB2</font></span><span>、</span><span><font face="Calibri">Sybase</font></span><span>和</span><span><font face="Calibri">DM3</font></span><span>。 </span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapGIS </font></td><br><td width="402" valign="top"><font face="Calibri">SQL Server</font><span>、</span><span><font face="Calibri">Oracle</font></span><span>、文件 </span></td><br><td width="170" valign="top">不同版本支持不同数据库</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">GeoStar </font></td><br><td width="402" valign="top">武汉大学测绘遥感国家重点实验室</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">VRMap </font></td><br><td width="402" valign="top"><font face="Calibri">SQL Server</font><span>、</span><span><font face="Calibri">Oracle</font></span><span>、</span><span><font face="Calibri">Access </font></span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapEngine </font></td><br><td width="402" valign="top"><font face="Calibri">SQL Server</font><span>、</span><span><font face="Calibri">Oracle</font></span><span>、</span><span><font face="Calibri">Access </font></span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">Grow </font></td><br><td width="402" valign="top"><font face="Calibri">SQL Server</font><span>、</span><span><font face="Calibri">Oracle </font></span></td><br><td width="170" valign="top"> </td><br></tr><br></table><br>这里最突出的是</span><span><font face="Calibri">SuperMap</font></span><span>，</span><span><font face="Calibri">SuperMap</font></span><span>提供了多种格式的数据组织方式，基于复合文档技术的</span><span><font face="Calibri">SDB</font></span><span>，基于桌面数据库的</span><span><font face="Calibri">MDB</font></span><span>，基于大型数据库的</span><span><font face="Calibri">SDX for Oracle</font></span><span>和</span><span><font face="Calibri">SDX for SQL Server</font></span><span>等。</span><span><font face="Calibri">SuperMap</font></span><span>的这些格式都有统一的对象模型和结构定义，各个格式支持的操作和功能从根本上是统一的。</span><span><font face="Calibri">SuperMap GIS</font></span><span>系列软件都可以直接打开这些格式的数据，并且能非常简单地实现各个数据格式数据源之间交换数据，如在同一格式的数据源内复制数据。</span><span><font face="Calibri">SuperMap</font></span><span>拥有独一无二的“多源空间数据无缝集成技术”，允许开发上轻易将使用</span><span><font face="Calibri">SuperMap</font></span><span>已建成的应用系统移植到其他格式。比如，在极少代码改动的情况下，一个使用</span><span><font face="Calibri">SQL Server</font></span><span>存储空间数据的应用系统或者产品轻松移植到使用</span><span><font face="Calibri">Oracle</font></span><span>或者</span><span><font face="Calibri">SDB</font></span><span>的环境中。 </span><span><br><br>### <span><span><font size="5" face="Calibri">3.5.</font><span>  </span></span></span><span><font size="5">二次开发难度</font></span><br><br><table unselectable="on" border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable"><br><tr><br><td width="139" valign="top">平台</td><br><td width="402" valign="top">二次开发难度</td><br><td width="170" valign="top">备注</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">SuperMap </font></td><br><td width="402" valign="top">专用<span><font face="Calibri">.Net</font></span><span>开发平台。参考资料多</span><span><font face="Calibri">,</font></span><span>开发难度最低 </span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapGIS </font></td><br><td width="402" valign="top"><font face="Calibri"><span> </span>API </font><span>函数层；</span><span><font face="Calibri">C++ </font></span><span>类层；</span><span><font face="Calibri">ActiveX </font></span><span>组件层。无</span><span><font face="Calibri">.Net </font></span><span>专用平台。。参考资料一般</span><span><font face="Calibri">,</font></span><span>传统客户端程序开发模式</span><span><font face="Calibri">,</font></span><span>需要了解传统</span><span><font face="Calibri">API</font></span><span>调用方式</span><span><font face="Calibri">. </font></span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">GeoStar </font></td><br><td width="402" valign="top"><font face="Calibri">COM </font><span>有</span><span><font face="Calibri">Java</font></span><span>平台无</span><span><font face="Calibri">.Net</font></span><span>平台。参考资料较多，开发难度中等。 </span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">VRMap </font></td><br><td width="402" valign="top"><font face="Calibri">COM</font><span>。 </span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapEngine </font></td><br><td width="402" valign="top"><font face="Calibri">API,</font><span>客户端需要采用</span><span><font face="Calibri">Java</font></span><span>技术。。参考资料一般，开发难度较高。 </span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">Grow </font></td><br><td width="402" valign="top"><font face="Calibri">Java</font><span>平台，</span><span><font face="Calibri">Web Services</font></span><span>。参考资料一般，开发难度容易。 </span></td><br><td width="170" valign="top"> </td><br></tr><br></table><br><br>### <span><span><font size="5" face="Calibri">3.6.</font><span>  </span></span></span><span><font size="5">产品及报价</font></span><br><br><table unselectable="on" border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable"><br><tr><br><td width="139" valign="top">平台</td><br><td width="402" valign="top">产品及报价</td><br><td width="170" valign="top">备注</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">SuperMap </font></td><br><td width="402" valign="top"><font face="Calibri">SuperMap IS.NET </font><span>专业版</span><span><font face="Calibri"> SuperMap Deskpro<span>  </span>98000+19800=117000 </font></span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapGIS </font></td><br><td width="402" valign="top"><font face="Calibri">Mapgis </font><span>专业版</span><span><font face="Calibri"><span>  </span>21800 </font></span></td><br><td width="170" valign="top">文本数据库</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">GeoStar </font></td><br><td width="402" valign="top">未知</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">VRMap </font></td><br><td width="402" valign="top">未知</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapEngine </font></td><br><td width="402" valign="top"><font face="Calibri">MapEngine.NET</font><span>网络</span><span><font face="Calibri">GIS</font></span><span>平台</span><span><font face="Calibri"> </font></span><span>数据准备工具</span><span><font face="Calibri"> 86800+8500=95300</font> </span></td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">Grow </font></td><br><td width="402" valign="top"><span><font face="Calibri">       </font></span><span>未知 </span></td><br><td width="170" valign="top"> </td><br></tr><br></table><br><br>### <span><span><font size="5" face="Calibri">3.7.</font><span>  </span></span></span><span><font size="5">电力行业成功案例</font></span><br><br><table unselectable="on" border="1" cellpadding="0" cellspacing="0" class="MsoNormalTable"><br><tr><br><td width="139" valign="top">平台</td><br><td width="402" valign="top">电力行业成功案例</td><br><td width="170" valign="top">备注</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">SuperMap</font></td><br><td width="402" valign="top"><font face="Calibri">WFECS3000</font><span>电能量综合管理自动化系统<br></span><span>重庆江北供电局配电管理地理信息系统</span><span><br></span><span>利用</span><span><font face="Calibri">SuperMap</font></span><span>开发配电管理地理信息系统<br></span><span>菩提树电力条图绘制软件</span><span><br></span><span>基于</span><span><font face="Calibri">SuperMap</font></span><span>的配电管理系统</span><span><br></span><span>胜利油田配电管理地理信息系统</span><span><br></span><span>新疆奎屯输配电</span><span><font face="Calibri">GIS</font></span><span>系统<br></span><span> </span><span>电力综合应用管理系统</span><span><br></span><span>输配电网地理信息系统 </span></td><br><td width="170" valign="top">均为几家公司利用<span><font face="Calibri">SuperMap</font></span><span>二次开发的系统，应用在上百家电力公司 </span></td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapGIS </font></td><br><td width="402" valign="top">青海电网地理信息系统<span><br></span><span>配电网地理信息及数据自动抄收分析管理系统 </span></td><br><td width="170" valign="top">产品：<span><font face="Calibri">MapGIS</font></span><span>电力配网信息管理系统 </span></td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">GeoStar </font></td><br><td width="402" valign="top"> </td><br><td width="170" valign="top">缺</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">VRMap </font></td><br><td width="402" valign="top"> </td><br><td width="170" valign="top">缺</td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">MapEngine </font></td><br><td width="402" valign="top">首都机场电力监控系统</td><br><td width="170" valign="top"> </td><br></tr><br><tr><br><td width="139" valign="top"><font face="Calibri">Grow </font></td><br><td width="402" valign="top">武汉供电局<span><font face="Calibri">AM/FM/GIS</font></span><span>系统</span><span><br></span><span>北京城区供电局配网</span><span><font face="Calibri">GIS</font></span><span>系统</span><span><br></span><span>电网图形信息管理系统</span><span><font face="Calibri">EFGIS </font></span></td><br><td width="170" valign="top">拥有专门产品<span><font face="Calibri"> </font></span><span>图形化电网综合信息管理系统</span><span><font face="Calibri">EFGIS </font></span></td><br></tr><br></table><br><br>## <span><span><font face="Cambria">4.</font><span>     </span></span></span><span>总结</span><br><br>通过仔细对比各自资料和服务态度，我们觉得基于<span><font face="Calibri">SuperMap</font></span><span>的</span><span><font face="Calibri">GIS</font></span><span>平台开发是我们最佳选择，其费用不高，提供了支持</span><span><font face="Calibri">VS 2005</font></span><span>的</span><span><font face="Calibri">Web Controls</font></span><span>，可以直接在</span><span><font face="Calibri">VS 2005</font></span><span>中使用。另外，</span><span><font face="Calibri">SuperMap</font></span><span>无论是文件格式还是空间数据库格式都支持拓扑关系存储管理功能。并且，针对交通网络资源管理中一根管道包含多条光纤</span><span><font face="Calibri">/</font></span><span>铜缆、一条道路多车道的特殊情况，</span><span><font face="Calibri">SuperMap</font></span><span>专门提供了解决方案，通过</span><span><font face="Calibri">RuleMask</font></span><span>可以对管线中指定的通信线缆、道路中的车道进行网络路径搜索，大大减少了二次开发的工作量。与此同时，</span><span><font face="Calibri">SuperMap</font></span><span>还支持在编辑时动态维护网络拓扑关系，增加管线无需重建拓扑关系。独特的节点联接关系矩阵为解决网络节点处理复杂的连接关系提供了方便。<br><br>## <span><span><font face="Cambria">5.</font><span>     </span></span></span><span>附录：公司介绍</span><br><br>### <span><span><font size="5" face="Calibri">5.1.</font><span>  </span></span></span><span><font size="5">北京超图地理信息技术有限公司</font></span><br><br>是在中国科学院地理信息产业发展中心支持下成立的一家软件公司，主要从事地理信息系统</span><br><br></span><span><font face="Calibri"> (GIS) </font></span><span>、遥感</span><span><font face="Calibri"> (Remote Sensing) </font></span><span>和全球定位系统</span><span><font face="Calibri"> (GPS)</font></span><span>技术基础软件平台、专业软件和应用系统的研制开发和销售。多次获得科技部的国产</span><span><font face="Calibri">GIS</font></span><span>软件评测推件软件称号 </span><span><br><br>### <span><span><font size="5" face="Calibri">5.2.</font><span>  </span></span></span><font size="5"><span>武汉中地数码集团有限公司</span><span><font face="Calibri"> </font></span></font>
+
+<p>专业从事<span><font face="Calibri">GIS</font></span><span>研究、开发和应用的大型软件集团，核心企业有武汉中地数码、北京中地时空、深圳中地软件及新疆、昆明、济南等分公司，其中武汉中地数码是国家百强重点软件企业之一。集团现有员工</span><span><font face="Calibri">500</font></span><span>多人，其中博士、硕士占</span><span><font face="Calibri">60%</font></span><span>以上，是一个开拓创新、团结奋斗、充满活力的高科技企业。业务情况：依托中国地质大学为技术，以吴信才教授为技术核心，从</span><span><font face="Calibri">80</font></span><span>年代初期开始涉足</span><span><font face="Calibri">GIS</font></span><span>的研究，目前在全国已拥有</span><span><font face="Calibri">5000</font></span><span>多</span><span><font face="Calibri">MAPGIS</font></span><span>用户（包括香港、台湾），国内市场占有率超过</span><span><font face="Calibri">30</font></span><span>％，用户量全国第一。</span></p>
+<h3 id="5-3-武汉武大吉奥信息工程技术有限公司"><a href="#5-3-武汉武大吉奥信息工程技术有限公司" class="headerlink" title="5.3.  武汉武大吉奥信息工程技术有限公司"></a><span><span><font size="5" face="Calibri">5.3.</font><span>  </span></span></span><span><font size="5">武汉武大吉奥信息工程技术有限公司</font></span></h3><p>成立于</p></span><p></p>
+<p><span><font face="Calibri">1999</font></span><span>年，提供空间信息领域的完整的解决方案，服务各行各业。公司拥有从空间数据获取处理更新、到建库集成与管理、到分析应用发布的完整覆盖空间信息产业的服务链。 </span><span></span></p>
+<h3 id="5-4-北京灵图软件技术有限公司"><a href="#5-4-北京灵图软件技术有限公司" class="headerlink" title="5.4.  北京灵图软件技术有限公司"></a><span><span><font size="5" face="Calibri">5.4.</font><span>  </span></span></span><span><font size="5">北京灵图软件技术有限公司</font></span></h3><p>成立于<span><font face="Calibri">1999</font></span><span>年，是一家以自主知识产权的软件产品为核心，集软件研发、地图生产、相关服务为一体的高新技术企业。灵图公司拥有甲级测绘资质（含导航电子地图制作），灵图的地图数据库覆盖全国所有县级以上城市，并拥有国内最丰富、最新的路网和</span><span><font face="Calibri">POI</font></span><span>信息。多次承担国家</span><span><font face="Calibri">863</font></span><span>项目。</span></p>
+<h3 id="5-5-北京朝夕科技有限责任公司"><a href="#5-5-北京朝夕科技有限责任公司" class="headerlink" title="5.5.  北京朝夕科技有限责任公司"></a><span><span><font size="5" face="Calibri">5.5.</font><span>  </span></span></span><span><font size="5">北京朝夕科技有限责任公司</font></span></h3><p>成立于</p>
+<p><span><font face="Calibri">1996</font></span><span>年</span><span><font face="Calibri">4</font></span><span>月，是专业地理信息系统（</span><span><font face="Calibri">GIS</font></span><span>）基础平台软件厂商，致力于</span><span><font face="Calibri">GIS</font></span><span>基础平台</span><span><font face="Calibri">MapEngine</font></span><span>及其衍生产品的研发以及</span><span><font face="Calibri">GIS</font></span><span>应用工程服务。 <font face="Calibri">1996</font></span><span>年底，朝夕科技率先推出全组件化</span><span><font face="Calibri">GIS</font></span><span>开发平台</span><span><font face="Calibri">MapEngine1.0</font></span><span>。</span><span><font face="Calibri">1997</font></span><span>年，获国家九五攻关项目支持。 <font face="Calibri">1998</font></span><span>年，</span><span><font face="Calibri">MapEngine 1.5</font></span><span>获中国软件行业协会“</span><span><font face="Calibri">98</font></span><span>年度推荐软件”称号，</span><span><font face="Calibri"> 98</font></span><span>、</span><span><font face="Calibri">99</font></span><span>、</span><span><font face="Calibri">2000</font></span><span>年度连续获科技部</span><span><font face="Calibri">GIS</font></span><span>评测优秀奖。 </span><span></span></p>
+<h3 id="5-6-深圳市雅都图形软件股份有限公司"><a href="#5-6-深圳市雅都图形软件股份有限公司" class="headerlink" title="5.6.  深圳市雅都图形软件股份有限公司"></a><span><span><font size="5" face="Calibri">5.6.</font><span>  </span></span></span><span><font size="5">深圳市雅都图形软件股份有限公司</font></span></h3><p>是国内<span><font face="Calibri">GIS</font></span><span>应用领域具有领先地位的专业软件开发商和解决方案提供商，国内大型</span><span><font face="Calibri">AM/FM/GIS</font></span><span>技术应用的领跑者。一直致力于</span><span><font face="Calibri">GIS</font></span><span>技术在城市公用事业产业领域的应用研究和市场推广。其拥有自主知识版权的大型</span><span><font face="Calibri">AM/FM/GIS</font></span><span>基础支撑平台</span><span><font face="Calibri">GROW</font></span><span>，以及在</span><span><font face="Calibri">GROW</font></span><span>平台上开发的系列专用软件产品，在海量图形数据的实时应用、企业级的协同工作等关键技术方面，已经达到或超过国外同类产品，在国家级的评测中连年获奖。雅都客户分布于全国</span><span><font face="Calibri">15</font></span><span>个省市自治区直辖市。</span></p>
+<p><span></span><span></span></p>
+
+  </div>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2016-09-28T06:31:18.385Z" itemprop="dateModified">
+        最后更新： <span class="red-text">2016-09-28</span>
+    </time>
+    
+  <!-- JiaThis Button BEGIN -->
+  <div class="jiathis_style clearfix"><a id="share" href="#share"></a>
+      <span class="jiathis_txt icon nova-share">分享：</span>
+      <a class="jiathis_button_tsina">微博</a>
+      <a class="jiathis_button_weixin">微信</a>
+      <a class="jiathis_button_twitter">推特</a>
+      <a class="jiathis_button_copy">复制网址</a>
+      <a class="jiathis_button_ishare">一键分享</a>
+      <a href="http://www.jiathis.com/share?uid=2115061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<!--       <a class="jiathis_counter_style"></a> -->
+  </div>
+  <!-- JiaThis Button END -->
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2115061" charset="utf-8" async="async"></script>
+
+  </footer>
+  <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+    <meta content="http://xuplus.com" itemprop="url">
+    <meta content="Dominic.Xu&#039;s 博客" itemprop="name">
+    <meta content="/image/logo.png" itemprop="logo">
+  </span>
+</article>
+<div>
+  <nav><ul class="pager"><li class="previous"><a href="/article/2007/07/a42.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">XOOPS开发工作可以告一段落了</span></a></li><li class="next"><a href="/article/2007/07/a40.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">一道接孩子放学的小学数学题(求小红提前下课了几分钟）</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal"><img src="/image/donate_button.png">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">打赏</h4>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <a name="comment"></a>
+
+<!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="978d197a60edad5b67dba18fa9658dfc" data-title="国产GIS平台选型" data-url="http://xuplus.com//article/2007/07/a41.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xuplus"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+    
+  </div>
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+    </aside>
+  </div>
+</div>
+</div>
+  <!-- footer -->
+  <footer id="footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2007-2016 <a href="http://xuplus.com/" target="_blank">Dominic Xu</a> Powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <br/><br/>
+    </div>
+    <div>
+      <a href="http://www.miitbeian.gov.cn" target="_blank"></a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab" style="bottom: 45px; right: 24px;">
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="http://www.jiathis.com/share?uid=2115061" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+  </div>
+  <!-- after footer, some 3rd script place here -->
+    <script type="text/javascript">
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+    
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script type="text/javascript">
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=16003826112187889004' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+    
+<!-- LeanClound官方Javascript SDK -->
+<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script>
+  AV.init({
+    appId : 'sOAoHgViAW1ueMP6mQALndLv-gzGzoHsz',
+    appKey : 'XUI7wYifGxcGQQQY6WWLuaig'
+  });
+
+  var lc_config = {
+    pageId : '978d197a60edad5b67dba18fa9658dfc',
+    url : 'http://xuplus.com//article/2007/07/a41.html' || '/article/2007/07/a41.html',
+    title : '国产GIS平台选型'
+  };
+  
+  var lc_table = 'Counter' || 'Counter';
+
+  (function() {
+    var query = new AV.Query(lc_table);
+    query.select(['-ACL']);
+    query.equalTo('pageId', lc_config.pageId);
+    query.first({
+      success: function(results) {
+        // results is an array of AV.Object.
+        if (typeof results === 'undefined') {
+          insert(results);
+          return;
+        }
+        console.log(results._serverData);
+        update(results);
+        show(results);
+      },
+      error: function(error) {
+        // error is an instance of AV.Error.
+        console.log(error);
+      }
+    });
+
+    function insert(data) {
+      if (!data) {
+        console.log('data is null new object');
+        var M = AV.Object.extend(lc_table);
+        data = new M();
+        data.set('views', 1);
+      }
+      for ( var key in lc_config) {
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log('created objectId is ' + data.id);
+      }, function(error) {
+        console.log("create object failed");
+        console.log(error);
+      });
+    }
+
+    function update(data) {
+      data.increment('views', 1);
+      for ( var key in lc_config) {
+        if (key !== 'pageId')
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log("update to " + data.get('views'));
+      }, function(error) {
+        console.log("update object failed");
+        console.log(error);
+      });
+    }
+    
+    function show(data) {
+      $(".post-share .nova-eye .count").html(data.get('views'));
+    }
+  })();
+</script>
+
+</body>
+</html>

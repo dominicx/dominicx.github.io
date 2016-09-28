@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head>
+  <meta charset="utf-8">
+  <title>PayDollar支付通道开发介绍及ECShop开发PayDollar注意事项</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="Web应用,ECShop,PayPal,PayDollar支付通道开发介绍及ECShop开发PayDollar注意事项">
+  <meta name="description" content="前些时候帮助一个香港朋友开发了ECShop的支付插件，他们使用PayDollar支付网关。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Dominic.Xu&#039;s 博客">
+  <meta name="og:image" content="http://xuplus.com/image/logo.png">
+  <meta name="og:title" content="PayDollar支付通道开发介绍及ECShop开发PayDollar注意事项">
+  <meta name="og:url" content="http://xuplus.com//article/2011/01/a201.html">
+  <meta name="og:description" content="前些时候帮助一个香港朋友开发了ECShop的支付插件，他们使用PayDollar支付网关。">
+
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://xuplus.com/article/2011/01/a201.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Dominic.Xu&#039;s 博客">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- header -->
+  <header>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/aboutme/" class="main-nav">关于</a></li>
+        </ul>
+        <!-- search input -->
+        
+
+<!-- 百度站内搜索（已通过站点验证） -->
+<form class="navbar-form navbar-left" role="search"
+  action="//search.xuplus.com/cse/search">
+  <div class="form-group search">
+    <input type="text" name="q" id="bdcsMain" class="form-control primary" aria-label="..." placeholder="搜索">
+    <input type="hidden" name="s" value="16003826112187889004">
+    <input type="hidden" name="nsid" value="0">
+
+  </div>
+</form>
+
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </div>
+
+    <script>
+        <!-- mobile -->
+    	$('.navbar-toggle').sidr({
+	      name: 'sidr-main',
+	      source: '#bs-example-navbar-collapse-1'
+	    });
+    	$('body').click(function(){
+    	  $.sidr('close', 'sidr-main');
+    	});
+    	
+    	$(".navbar-fixed-top").autoHidingNavbar({
+    	  // see next for specifications
+    	});
+    </script>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+    
+    <article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/Web应用/">Web应用</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name">PayDollar支付通道开发介绍及ECShop开发PayDollar注意事项</h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2011-01-04T09:09:54.000Z" itemprop="datePublished"><time datetime="2011-01-04T09:09:54.000Z">2011-01-04</time></time>
+      </span>
+      <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/ECShop/">ECShop</a><a class="tag-item" href="/tags/PayPal/">PayPal</a></span>
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" data-thread-key="76493d741033e62b88e709f5937fb12f"></span><!-- <span class="hidden-xs">评论</span> --></a>
+        <a href="#like" class="icon nova-heart2-full"><span class="count"></span><span class="hidden-xs">喜欢</span></a>
+        <a href="#" class="icon nova-eye"><span class="count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+  </header>
+  <div class="article-content" itemprop="articleBody" id="post-content">
+    <p>前些时候帮助一个香港朋友开发了ECShop的支付插件，他们使用PayDollar支付网关。</p>
+<p>www.paydollar.com联款通有限公司成立于2000年，是领先的世界级电子付款及移动付款解决方案与技术提供应商，亦是香港最大第三方支付平台之一。    </p>
+<p>「传款易支付网关」是一个完善、综合、安全及提供实时交易的平台，可供银行或支付处理服务机构架设一个可支持多种支付方式的收付款服务，帮助提高商户销量及生产力。 </p>
+<p>「传款易支付网关」能处理不同渠道的实时支付交易，如网络支付及移动设备支付。也能提供界面连接到各种支付系统主机作为支付授权和结算。    </p>
+<p><strong>核心功能</strong> </p>
+<ul>
+<li>支持多语言和多支付模式，提供各类完整的报告<em>   支持多支付模式如:网上交易、离线交易、其他定制化的支付交易</em>   便捷架设及提供多商户连接界面*   灵活选择独立支付界面或后端连接界面，商户无须额外投资任何软件  </li>
+</ul>
+<p><strong>支付方式</strong></p>
+<ul>
+<li>VISA / 万事达咭 / 大来信用证JCB 本地银行户口付款 (如PPS)  </li>
+</ul>
+<p><strong>交易功能</strong></p>
+<ul>
+<li>通过网络及移动设备进行电子商务、移动商务、邮购及电话购物<em>   实时撤销及处理退款要求</em>   手动、自动或整批结算选择  </li>
+</ul>
+<p><strong>电子邮件通知功能</strong></p>
+<ul>
+<li>综合商户帐户让商户可以通过不同渠道进行交易管理<em>   完善的交易报告显示销售状况</em>   单笔交易或整批交易资料下载  </li>
+</ul>
+<p><strong>控制功能</strong></p>
+<ul>
+<li>多层式用户群控制管理，可供银行或商户使用<em>   提供安全管理网站给银行及商户</em>   指定商户每比、每日、每月的金额上限*   风险控制工具包括:阻挡负面IP及信用卡的交易、实时交易检查及风险警示功能  </li>
+</ul>
+<p><strong>安全功能</strong></p>
+<ul>
+<li>采用128位SSL加密装置<em>   资料库加密</em>   支持VISA验证、SecureCode认证JCB/Jsecure认证服务*   PayAlert(实时交易风险检查)  </li>
+</ul>
+<p><strong>其他增值功能</strong></p>
+<ul>
+<li>循环支付设定及管理*   自建购物网站和购物交易管理  </li>
+</ul>
+<p><strong>界面标准</strong></p>
+<ul>
+<li>支持ISO 8583和SSL银行支付连接界面  </li>
+</ul>
+<p>&#160;</p>
+<p>总之，在香港它就是像支付宝、快钱这样的第三方支付平台，可对大陆客户提供中国银联网上支付平台、支付宝平台、财付通平台、快钱平台、PayPal平台支付以及Visa、MasterCar、JCB等信用卡直接扣帐支付的一个综合支付交易平台。应该是香港商家对大陆客户提供服务的可靠支付通道。</p>
+<p>如果有碰到有朋友或者客户需要使用PayDollar支付平台可以参考一下内容：<br> <!-- nextpage -->  </p>
+<p>一般香港商户在完成在香港的银行开户之后，可以接洽PayDollar，PayDollar之后会发送一个CheckList让香港商户去准备，要求做到以下几点：</p>
+<ol>
+<li>一个商户自己的页面（一般有网站即可）；2.  在页面底部放入PayDollar和相应需要支付平台的Logo（PayDollar必须放，其他Logo要看香港商户跟PayDollar的谈判，如果只有银联平台则只放PayDollar和银联的Logo）；3.  提供一个包含交易货币的有关货物和服务的描述页面；4.  提供一个描述退换货、货物配送、使用条款的页面；5.  提供一个公司联系方式信息页面，至少包含公司地址、email地址和电话号码；6.  提供一个页面描述支付卡交易策略和安全保障措施（例如：SSL和数据加密，他们会给一个范例）；7.  提供一个页面描述顾客数据隐私保护策略（例如：Cookies）；8.  一个购物车  </li>
+</ol>
+<p>其中，很多条款他们都提供了参考页面，购物车可以实现也可以不实现，只要有购买页面即可。就是为了满足这个需要踩帮助香港的朋友使用了ECShop，谁知道ECShop并没有PayDollar支付插件，网上可以找到一些PayDollar的支付代码（ShopEx的插件代码），但是已经不能和PayDollar现在的支付网关适应了。</p>
+<p>准备好之后，PayDollar会开通商户的支付功能，并提供一个商户号（Merchant Id），我们还需要发送邮件到<a href="mailto:service@paydollar.com" target="_blank" rel="external">service@paydollar.com</a>，要求开通商户帐号的哈希码安全认证功能（为了确保支付安全还是开通了好）</p>
+<p>在给ECShop开发PayDollar支付插件有以下几个问题树妖注意：</p>
+<ol>
+<li>PayDollar对于每一个币种都是单独的商户号也对应不同的哈希码安全认证；2.  PayDollar现在支持哈希码安全认证功能，且哈希算法变成了SHA1，哈希码安全认证有效期两年；3.  PayDollar的跳转商户页面和PayDollar返回支付成功信息页面是两个页面；4.  PayDollar有关哈希码安全认证功能中各个参数有变化（相对网上可以搜索到的ShopEx的插件代码），连接字符串已经变成了竖线|而不是&amp;符号；5.  提供给PayDollar的交易返回页面是需要在PayDollar管理系统中设置的，而不是在代码中指定的，PayDollar是通过Post方法来将数据提交到这个指定URL；6.  如果不是使用Client通过浏览器Post的方式支付，则需要自己实现支付页面（可自己实现信用卡信息填写页面，做3DS验证）。  </li>
+</ol>
+<p>在给ECShop开发插件过程中我给上面第三条和第五条搞败了，ECShop接收返回信息是通过/respond.php文件再调用includes/modules/payment/paydollar.php中的respond()方法的，开始的时候我并不知道这样，这样直接导致需要单独给一个文件给PayDollar来处理支付通知信息，respond()方法中只提供支付成败信息然后让respond.php输出支付成败提示信息，respond.php文件还一定得显示respond.dwt这个Smarty模板文件。为了偷懒，我在在respond()方法中通过判断回传参数来区分是PayDollar直接跳转的还是Post回传的。设置PayDollar系统中返回链接方式如下：</p>
+<p>登录PayDollar之后，在“商家资料”页面，点击“支付选项”，进入设置页面，填入对应的链接地址，选中右侧的“可用”，点击“更新”按钮再在后续页面点击“确定”按钮即可，如下图：</p>
+<p><a href="http://xuplus.com/uploads/2011/01/paydollar_setting.png"><img src="http://xuplus.com/uploads/2011/01/paydollar_setting_thumb.png" alt="paydollar_setting" title="paydollar_setting"></a></p>
+<p>这样就可以正常实现支付了。附件中是PayDollar集成开发的文档，仅供参考，文档主要有：<br>  <div style="padding-bottom: 0px; margin: 0px; padding-left: 0px; padding-right: 0px; display: inline; float: none; padding-top: 0px" id="scid:9D7513F9-C04C-4721-824A-2B34F0212519:ba859874-17a3-44ae-a535-7cd67bb0b417" class="wlWriterEditableSmartContent"><pre style=" width: 579px; height: 340px;background-color:White;overflow: auto;"><div>&lt;!–</div></pre></div></p>
+<p>Code highlighting produced by Actipro CodeHighlighter (freeware)<br><a href="http://www.CodeHighlighter.com/" target="_blank" rel="external">http://www.CodeHighlighter.com/</a></p>
+<p>–&gt;<span style="color: #000000;">├─开源购物车插件<br>│      Magento PayDollar_v1</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      OpenCart PayDollar<em>v148b</em></span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      oscommerce paydollar v2</span><span style="color: #000000;">.</span><span style="color: #000000;">3</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      PayDollar开源购物车集成指南_v2</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>│      VirtueMart_PayDollar</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      virtuemart_payment_extra_info</span><span style="color: #000000;">.</span><span style="color: #000000;">txt<br>│      ZenCart paydollar_payment_module_1-</span><span style="color: #000000;">0</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│<br>├─技术文档<br>│      付款流程概述</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>│      传款易定时付款用户指南SchedulePay_V1</span><span style="color: #000000;">.</span><span style="color: #000000;">6</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>│      传款易批事务处理用户指南V1</span><span style="color: #000000;">.</span><span style="color: #000000;">0</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>│      传款易集成指南 <em>v3</em></span><span style="color: #000000;">.</span><span style="color: #000000;">7</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>│<br>├─接口代码例子<br>│      asp_DirectClientPost</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      asp_SimpleClientPost</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      Csharp_DirectClientPost</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      Csharp_DirectServerSide</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      Csharp_SimpleClientPost</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      java_DirectClientPost</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      java_DirectServerSide</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      java_SimpleClientPost</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      php_DirectClientPost</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      php_DirectServerSide</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│      php_SimpleClientPost</span><span style="color: #000000;">.</span><span style="color: #000000;">zip<br>│<br>└─文件<br>        Bank required checklist items</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>        FAQ_for_Alipay_By<em>PayDollar</em></span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>        Logo使用说明</span><span style="color: #000000;">.</span><span style="color: #000000;">txt<br>        PayDollar商户操作指南<em>v3-</em></span><span style="color: #000000;">5</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>        PayDollar操作指南</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf<br>        退款手续_v1</span><span style="color: #000000;">.</span><span style="color: #000000;">pdf</span><!-- Code inserted with Steve Dunn's Windows Live Writer Code Formatter Plugin.  http://dunnhq.com --></p>
+<p>下载地址：<a href="http://cid-2b707ffec38c35d2.office.live.com/self.aspx/Public/%E7%BD%91%E7%BB%9C%E5%85%B1%E4%BA%AB/PayDollar%E9%9B%86%E6%88%90%E8%B5%84%E6%96%99.rar" target="_blank" rel="external">PayDollar集成资料.rar</a></p>
+
+  </div>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2016-09-28T06:31:18.427Z" itemprop="dateModified">
+        最后更新： <span class="red-text">2016-09-28</span>
+    </time>
+    
+  <!-- JiaThis Button BEGIN -->
+  <div class="jiathis_style clearfix"><a id="share" href="#share"></a>
+      <span class="jiathis_txt icon nova-share">分享：</span>
+      <a class="jiathis_button_tsina">微博</a>
+      <a class="jiathis_button_weixin">微信</a>
+      <a class="jiathis_button_twitter">推特</a>
+      <a class="jiathis_button_copy">复制网址</a>
+      <a class="jiathis_button_ishare">一键分享</a>
+      <a href="http://www.jiathis.com/share?uid=2115061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<!--       <a class="jiathis_counter_style"></a> -->
+  </div>
+  <!-- JiaThis Button END -->
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2115061" charset="utf-8" async="async"></script>
+
+  </footer>
+  <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+    <meta content="http://xuplus.com" itemprop="url">
+    <meta content="Dominic.Xu&#039;s 博客" itemprop="name">
+    <meta content="/image/logo.png" itemprop="logo">
+  </span>
+</article>
+<div>
+  <nav><ul class="pager"><li class="previous"><a href="/article/2011/01/a208.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">VMWare 中虚拟机报错“eth0 设备的 MAC 地址与预想的不符，忽略。”解决办法</span></a></li><li class="next"><a href="/article/2010/12/a198.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">科技项目“主要技术经济指标”的编写</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal"><img src="/image/donate_button.png">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">打赏</h4>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <a name="comment"></a>
+
+<!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="76493d741033e62b88e709f5937fb12f" data-title="PayDollar支付通道开发介绍及ECShop开发PayDollar注意事项" data-url="http://xuplus.com//article/2011/01/a201.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xuplus"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+    
+  </div>
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+    </aside>
+  </div>
+</div>
+</div>
+  <!-- footer -->
+  <footer id="footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2007-2016 <a href="http://xuplus.com/" target="_blank">Dominic Xu</a> Powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <br/><br/>
+    </div>
+    <div>
+      <a href="http://www.miitbeian.gov.cn" target="_blank"></a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab" style="bottom: 45px; right: 24px;">
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="http://www.jiathis.com/share?uid=2115061" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+  </div>
+  <!-- after footer, some 3rd script place here -->
+    <script type="text/javascript">
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+    
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script type="text/javascript">
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=16003826112187889004' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+    
+<!-- LeanClound官方Javascript SDK -->
+<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script>
+  AV.init({
+    appId : 'sOAoHgViAW1ueMP6mQALndLv-gzGzoHsz',
+    appKey : 'XUI7wYifGxcGQQQY6WWLuaig'
+  });
+
+  var lc_config = {
+    pageId : '76493d741033e62b88e709f5937fb12f',
+    url : 'http://xuplus.com//article/2011/01/a201.html' || '/article/2011/01/a201.html',
+    title : 'PayDollar支付通道开发介绍及ECShop开发PayDollar注意事项'
+  };
+  
+  var lc_table = 'Counter' || 'Counter';
+
+  (function() {
+    var query = new AV.Query(lc_table);
+    query.select(['-ACL']);
+    query.equalTo('pageId', lc_config.pageId);
+    query.first({
+      success: function(results) {
+        // results is an array of AV.Object.
+        if (typeof results === 'undefined') {
+          insert(results);
+          return;
+        }
+        console.log(results._serverData);
+        update(results);
+        show(results);
+      },
+      error: function(error) {
+        // error is an instance of AV.Error.
+        console.log(error);
+      }
+    });
+
+    function insert(data) {
+      if (!data) {
+        console.log('data is null new object');
+        var M = AV.Object.extend(lc_table);
+        data = new M();
+        data.set('views', 1);
+      }
+      for ( var key in lc_config) {
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log('created objectId is ' + data.id);
+      }, function(error) {
+        console.log("create object failed");
+        console.log(error);
+      });
+    }
+
+    function update(data) {
+      data.increment('views', 1);
+      for ( var key in lc_config) {
+        if (key !== 'pageId')
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log("update to " + data.get('views'));
+      }, function(error) {
+        console.log("update object failed");
+        console.log(error);
+      });
+    }
+    
+    function show(data) {
+      $(".post-share .nova-eye .count").html(data.get('views'));
+    }
+  })();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head>
+  <meta charset="utf-8">
+  <title>两网隔离情况下非法连接外网的检测</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="系统应用,获取IE历史记录,非法连接外网,两网隔离情况下非法连接外网的检测">
+  <meta name="description" content="现在一些单位为了避免资料泄露，都实行了隔离外网的措施，但是这样的单位往往分支机构比较多，很难保证所有的下级分支机构不会自己接入光纤、开通ADSL，实际上造成了内网、外网两网隔离工作的失败。这里提出一个在两网隔离情况下非法连接外网的检测方法，这个也是一个08年工作内容之一的总结。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="Dominic.Xu&#039;s 博客">
+  <meta name="og:image" content="http://xuplus.com/image/logo.png">
+  <meta name="og:title" content="两网隔离情况下非法连接外网的检测">
+  <meta name="og:url" content="http://xuplus.com//article/2008/05/a115.html">
+  <meta name="og:description" content="现在一些单位为了避免资料泄露，都实行了隔离外网的措施，但是这样的单位往往分支机构比较多，很难保证所有的下级分支机构不会自己接入光纤、开通ADSL，实际上造成了内网、外网两网隔离工作的失败。这里提出一个在两网隔离情况下非法连接外网的检测方法，这个也是一个08年工作内容之一的总结。">
+
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://xuplus.com/article/2008/05/a115.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Dominic.Xu&#039;s 博客">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- header -->
+  <header>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/aboutme/" class="main-nav">关于</a></li>
+        </ul>
+        <!-- search input -->
+        
+
+<!-- 百度站内搜索（已通过站点验证） -->
+<form class="navbar-form navbar-left" role="search"
+  action="//search.xuplus.com/cse/search">
+  <div class="form-group search">
+    <input type="text" name="q" id="bdcsMain" class="form-control primary" aria-label="..." placeholder="搜索">
+    <input type="hidden" name="s" value="16003826112187889004">
+    <input type="hidden" name="nsid" value="0">
+
+  </div>
+</form>
+
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </div>
+
+    <script>
+        <!-- mobile -->
+    	$('.navbar-toggle').sidr({
+	      name: 'sidr-main',
+	      source: '#bs-example-navbar-collapse-1'
+	    });
+    	$('body').click(function(){
+    	  $.sidr('close', 'sidr-main');
+    	});
+    	
+    	$(".navbar-fixed-top").autoHidingNavbar({
+    	  // see next for specifications
+    	});
+    </script>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+    
+    <article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/系统应用/">系统应用</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name">两网隔离情况下非法连接外网的检测</h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2008-05-22T02:21:00.000Z" itemprop="datePublished"><time datetime="2008-05-22T02:21:00.000Z">2008-05-22</time></time>
+      </span>
+      <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/获取IE历史记录/">获取IE历史记录</a><a class="tag-item" href="/tags/非法连接外网/">非法连接外网</a></span>
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" data-thread-key="a883c1dba27b9e917cf7ae1fc8e21c73"></span><!-- <span class="hidden-xs">评论</span> --></a>
+        <a href="#like" class="icon nova-heart2-full"><span class="count"></span><span class="hidden-xs">喜欢</span></a>
+        <a href="#" class="icon nova-eye"><span class="count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+  </header>
+  <div class="article-content" itemprop="articleBody" id="post-content">
+    <p>现在一些单位为了避免资料泄露，都实行了隔离外网的措施，但是这样的单位往往分支机构比较多，很难保证所有的下级分支机构不会自己接入光纤、开通ADSL，实际上造成了内网、外网两网隔离工作的失败。这里提出一个在两网隔离情况下非法连接外网的检测方法，这个也是一个08年工作内容之一的总结。</p>
+<p>首先，我们需要向所有用户工作用机部署一个常态运行的软件，可以是桌面管理程序，也可以是其他均需要有的程序，我们在这个程序的基础上做一定的开发工作。</p>
+<p>业务流程图如下：</p>
+<p><a href="http://xuplus.com/uploads/2008/12/image1.png"><img src="http://xuplus.com/uploads/2008/12/image-thumb.png" alt="外网检测业务流程图" title="外网检测业务流程图"></a> </p>
+<p>首先在某个应用MIS中完成对部门、人员、IP段是否可以连通互联网的权限进行设置，有连通互联网权限的终端可以不做外网连接检测，相当于设置外网连接检测的免检名单。<br> </p><p>根据设置的连接外网检测权限和系统设置的本地Web应用URL前缀、外连检测URL、外联检测程序尝试使用路由检测、IE历史记录检测、maxthon历史记录检测、Firefox历史记录检测、代理上网检测、其他常用网络软件检测等手段检测桌面终端和外网连通情况。这种方式避免传统靠检测附加硬件设备（判断是否存在Modem等）判定的方式的局限性，更为通用和有效。  </p><p>路由检测法：尝试路由到指定IP，并获取返回的路由结果。判定给定网关前缀是否在路由链中，如果在则说明通过路由检测，否则说明存在连接外网行为。  </p><p>IE历史记录检测：通过编程实现获取IE的浏览页面历史记录，并剔除URL前缀符合管理员设置的本地web应用URL（自动剔除file://开头的本地文件URL），形成桌面终端用户访问网页历史记录，判定用户是否访问外网。  </p><p>Firefox历史记录检测：探测firefox路径，通过编程实现获取Firefox的浏览页面历史记录，并剔除URL前缀符合管理员设置的本地web应用URL（自动剔除file://开头的本地文件URL），形成桌面终端用户访问网页历史记录，判定用户是否访问外网。Firefox 的url历史记录，可参考firefox源代码或者处理local data 目录下\Mozilla\Firefox\Profiles*<strong>*</strong>.default\Cache下的文件。另外，在firefox下访问about:cache可以看到url访问历史记录。  </p><p>直连及代理上网检测：在系统设定的外连检测url中挑选3～5条作为检测项。直接使用socket连接这些检测项的URL，如果能够正常返回数据，在检测返回的数据中是否包含检测项中指定的检测字符串，如果包含则说明该桌面终端连接到外网，如果连接URL是socket出现错误，则判定不能连接外网。读取注册表（HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Internet Settings\）中的ProxyEnable项，如果值为0或读取失败，则判定不能连接外网，如果值为非0值，读取ProxyServer的值，依次使用该值提供的代理设置，尝试使用代理连接这些检测项的URL，如果能够正常返回数据，在检测返回的数据中是否包含检测项中指定的检测字符串，如果包含则说明该桌面终端连接到外网，如果连接URL是socket出现错误，则判定不能连接外网。  </p><p>其他常用网络软件检测：根据系统设定的外连检测程序，在系统的进程列表中检测是否存在管理员指定的进程，如果存在则判定连接外网。  </p><p>其中每个检测所需要的参数均需要通过管理控制台来设置，在检测到有外网连接的时候，可以通过网管工具或者其他手段自动断开内网或者告警。  </p><p>获取IE访问历史记录参考代码如下：<pre class="csharpcode"><span class="rem">//Powered by fOx,转载请保留作者信息 : Email Destiny-fOx@hotmail.com</span><br><span class="kwrd">void</span> GetUrlHistoryMethod2()<br>{<br>     HANDLE hFind = NULL;<br>     DWORD dwSize = NULL;<br>     hFind = ::FindFirstUrlCacheEntryA(<span class="str">“visited:”</span>,NULL,&amp;dwSize);<br>     HANDLE hHeap = ::HeapCreate(NULL,0x100,0x10000000);<br>     LPINTERNET_CACHE_ENTRY_INFOA pInfo = (LPINTERNET_CACHE_ENTRY_INFOA)::HeapAlloc(hHeap,LPTR,dwSize);<br>     hFind = ::FindFirstUrlCacheEntryA(<span class="str">“visited:”</span>,pInfo,&amp;dwSize);<br>     <span class="kwrd">if</span>(hFind)<br>     {<br>         <span class="kwrd">int</span> n = 0;<br>         <span class="kwrd">while</span>(pInfo != NULL)<br>         {<br>              <span class="rem">/<em></em></span><br><span class="rem">              typedef struct _INTERNET_CACHE_ENTRY_INFOA {</span><br><span class="rem">              DWORD dwStructSize;         // version of cache system.0</span><br><span class="rem">              LPSTR   lpszSourceUrlName;    // embedded pointer to the URL name string.4</span><br><span class="rem">              LPSTR   lpszLocalFileName;  // embedded pointer to the local file name.8</span><br><span class="rem">              DWORD CacheEntryType;       // cache type bit mask.C</span><br><span class="rem">              DWORD dwUseCount;           // current users count of the cache entry.10</span><br><span class="rem">              DWORD dwHitRate;            // num of times the cache entry was retrieved.</span><br><span class="rem">              DWORD dwSizeLow;            // low DWORD of the file size.</span><br><span class="rem">              DWORD dwSizeHigh;           // high DWORD of the file size.</span><br><span class="rem">              FILETIME LastModifiedTime;  // last modified time of the file in GMT format.</span><br><span class="rem">              FILETIME ExpireTime;        // expire time of the file in GMT format</span><br><span class="rem">              FILETIME LastAccessTime;    // last accessed time in GMT format</span><br><span class="rem">              FILETIME LastSyncTime;      // last time the URL was synchronized</span><br><span class="rem">              // with the source</span><br><span class="rem">              LPSTR   lpHeaderInfo;        // embedded pointer to the header info.</span><br><span class="rem">              DWORD dwHeaderInfoSize;     // size of the above header.</span><br><span class="rem">              LPSTR   lpszFileExtension;  // File extension used to retrive the urldata as a file.</span><br><span class="rem">              union {                     // Exemption delta from last access time.</span><br><span class="rem">              DWORD dwReserved;</span><br><span class="rem">              DWORD dwExemptDelta;</span><br><span class="rem">              };                          // Exemption delta from last access</span><br><span class="rem">              } INTERNET_CACHE_ENTRY_INFOA,  LPINTERNET_CACHE_ENTRY_INFOA;</span><br><span class="rem">              <em>/</em></span><br>              LPBYTE p = (LPBYTE)(pInfo-&gt;lpHeaderInfo);<br>              p += (PWORD)p;<br>              <span class="kwrd">if</span>(p != NULL)<br>                   <span class="kwrd">if</span>(p[2] != 0x10)<br>                       p = NULL;<br>                   <span class="kwrd">else</span><br>                   {<br>                       <span class="kwrd">if</span>(p[3] == 0x1F)<br>                            p += 4;<br>                       <span class="kwrd">else</span><br>                            p = NULL;<br>                   }<br>              printf(<span class="str">“[%d] SourceUrlName : %s ,LocalFileName : %s Title : %S \r\n”</span><br>                   ,n,pInfo-&gt;lpszSourceUrlName,pInfo-&gt;lpszLocalFileName,p);<br>              n++;<br>              pInfo = NULL;<br>              dwSize = 1000;<br>              pInfo = (LPINTERNET_CACHE_ENTRY_INFOA)::HeapAlloc(hHeap,LPTR,dwSize);</pre></p>
+<pre><code>         &lt;span class=&quot;kwrd&quot;&gt;if&lt;/span&gt;(pInfo == NULL)
+         {
+              DWORD dwError = ::GetLastError();
+              printf(&lt;span class=&quot;str&quot;&gt;&quot;HeapAlloc Error : %d\r\n&quot;&lt;/span&gt;,dwError);
+         }
+         BOOL bSus = ::FindNextUrlCacheEntryA(hFind,pInfo,&amp;amp;dwSize);
+         &lt;span class=&quot;kwrd&quot;&gt;if&lt;/span&gt;(bSus == FALSE)
+         {
+              pInfo = NULL;
+              DWORD dwError = ::GetLastError();
+              printf(&lt;span class=&quot;str&quot;&gt;&quot;Error : %d\r\n&quot;&lt;/span&gt;,dwError);
+         }
+    }
+    ::FindCloseUrlCache(hFind);
+    ::HeapDestroy(hHeap);
+}
+</code></pre><p>}</p>
+<p></p>
+<style type="text/css">.csharpcode, .csharpcode pre
+{
+    font-size: small;
+    color: black;
+    font-family: consolas, "Courier New", courier, monospace;
+    background-color: #ffffff;
+    /*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+    background-color: #f4f4f4;
+    width: 100%;
+    margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }
+</style>
+  </div>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2016-09-28T06:31:18.413Z" itemprop="dateModified">
+        最后更新： <span class="red-text">2016-09-28</span>
+    </time>
+    
+  <!-- JiaThis Button BEGIN -->
+  <div class="jiathis_style clearfix"><a id="share" href="#share"></a>
+      <span class="jiathis_txt icon nova-share">分享：</span>
+      <a class="jiathis_button_tsina">微博</a>
+      <a class="jiathis_button_weixin">微信</a>
+      <a class="jiathis_button_twitter">推特</a>
+      <a class="jiathis_button_copy">复制网址</a>
+      <a class="jiathis_button_ishare">一键分享</a>
+      <a href="http://www.jiathis.com/share?uid=2115061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<!--       <a class="jiathis_counter_style"></a> -->
+  </div>
+  <!-- JiaThis Button END -->
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2115061" charset="utf-8" async="async"></script>
+
+  </footer>
+  <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+    <meta content="http://xuplus.com" itemprop="url">
+    <meta content="Dominic.Xu&#039;s 博客" itemprop="name">
+    <meta content="/image/logo.png" itemprop="logo">
+  </span>
+</article>
+<div>
+  <nav><ul class="pager"><li class="previous"><a href="/article/2008/12/a117.html"><span aria-hidden="true">&larr;</span><span class="hidden-xs">虚拟化平台比较</span></a></li><li class="next"><a href="/article/2008/04/a103.html"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">推荐使用VSTS Web Access 2008替代团队浏览器完成大部分工作</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal"><img src="/image/donate_button.png">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">打赏</h4>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <a name="comment"></a>
+
+<!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="a883c1dba27b9e917cf7ae1fc8e21c73" data-title="两网隔离情况下非法连接外网的检测" data-url="http://xuplus.com//article/2008/05/a115.html"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xuplus"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+    
+  </div>
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+    </aside>
+  </div>
+</div>
+</div>
+  <!-- footer -->
+  <footer id="footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2007-2016 <a href="http://xuplus.com/" target="_blank">Dominic Xu</a> Powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <br/><br/>
+    </div>
+    <div>
+      <a href="http://www.miitbeian.gov.cn" target="_blank"></a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab" style="bottom: 45px; right: 24px;">
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="http://www.jiathis.com/share?uid=2115061" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+  </div>
+  <!-- after footer, some 3rd script place here -->
+    <script type="text/javascript">
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+    
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script type="text/javascript">
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=16003826112187889004' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+    
+<!-- LeanClound官方Javascript SDK -->
+<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script>
+  AV.init({
+    appId : 'sOAoHgViAW1ueMP6mQALndLv-gzGzoHsz',
+    appKey : 'XUI7wYifGxcGQQQY6WWLuaig'
+  });
+
+  var lc_config = {
+    pageId : 'a883c1dba27b9e917cf7ae1fc8e21c73',
+    url : 'http://xuplus.com//article/2008/05/a115.html' || '/article/2008/05/a115.html',
+    title : '两网隔离情况下非法连接外网的检测'
+  };
+  
+  var lc_table = 'Counter' || 'Counter';
+
+  (function() {
+    var query = new AV.Query(lc_table);
+    query.select(['-ACL']);
+    query.equalTo('pageId', lc_config.pageId);
+    query.first({
+      success: function(results) {
+        // results is an array of AV.Object.
+        if (typeof results === 'undefined') {
+          insert(results);
+          return;
+        }
+        console.log(results._serverData);
+        update(results);
+        show(results);
+      },
+      error: function(error) {
+        // error is an instance of AV.Error.
+        console.log(error);
+      }
+    });
+
+    function insert(data) {
+      if (!data) {
+        console.log('data is null new object');
+        var M = AV.Object.extend(lc_table);
+        data = new M();
+        data.set('views', 1);
+      }
+      for ( var key in lc_config) {
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log('created objectId is ' + data.id);
+      }, function(error) {
+        console.log("create object failed");
+        console.log(error);
+      });
+    }
+
+    function update(data) {
+      data.increment('views', 1);
+      for ( var key in lc_config) {
+        if (key !== 'pageId')
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log("update to " + data.get('views'));
+      }, function(error) {
+        console.log("update object failed");
+        console.log(error);
+      });
+    }
+    
+    function show(data) {
+      $(".post-share .nova-eye .count").html(data.get('views'));
+    }
+  })();
+</script>
+
+</body>
+</html>
