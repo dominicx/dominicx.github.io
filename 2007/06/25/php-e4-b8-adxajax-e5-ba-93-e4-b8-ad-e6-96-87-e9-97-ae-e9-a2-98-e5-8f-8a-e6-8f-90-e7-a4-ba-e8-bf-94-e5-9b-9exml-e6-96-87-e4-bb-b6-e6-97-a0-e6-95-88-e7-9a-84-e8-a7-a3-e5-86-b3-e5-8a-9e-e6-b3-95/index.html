@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head>
+  <meta charset="utf-8">
+  <title>PHP中xajax库中文问题及提示返回XML文件无效的解决办法</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="PHP,中文,xajax,编码,PHP中xajax库中文问题及提示返回XML文件无效的解决办法">
+  <meta name="description" content="xajax是PHP下一个非常好的ajax框架，虽然xajax自己说自己是一个库(Library)，但是我觉得它更像一个框架（Framework）。xajax是一个开源的 PHP 类库 它能够让你黏合HTML、CSS、Javascript和PHP，并可以结合Smarty模板系统使用。">
+   
+
+  <meta name="og:type" content="article">
+  <meta name="og:site_name" content="静勤居">
+  <meta name="og:image" content="http://xuplus.com/image/logo.png">
+  <meta name="og:title" content="PHP中xajax库中文问题及提示返回XML文件无效的解决办法">
+  <meta name="og:url" content="http://xuplus.com/2007/06/25/php-e4-b8-adxajax-e5-ba-93-e4-b8-ad-e6-96-87-e9-97-ae-e9-a2-98-e5-8f-8a-e6-8f-90-e7-a4-ba-e8-bf-94-e5-9b-9exml-e6-96-87-e4-bb-b6-e6-97-a0-e6-95-88-e7-9a-84-e8-a7-a3-e5-86-b3-e5-8a-9e-e6-b3-95/">
+  <meta name="og:description" content="xajax是PHP下一个非常好的ajax框架，虽然xajax自己说自己是一个库(Library)，但是我觉得它更像一个框架（Framework）。xajax是一个开源的 PHP 类库 它能够让你黏合HTML、CSS、Javascript和PHP，并可以结合Smarty模板系统使用。">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="静勤居">
+  <meta name="twitter:image" content="http://xuplus.com/image/logo.png">
+  <meta name="twitter:title" content="PHP中xajax库中文问题及提示返回XML文件无效的解决办法">
+  <meta name="twitter:creator" content="@JamlingLi">
+  <meta name="twitter:description" content="xajax是PHP下一个非常好的ajax框架，虽然xajax自己说自己是一个库(Library)，但是我觉得它更像一个框架（Framework）。xajax是一个开源的 PHP 类库 它能够让你黏合HTML、CSS、Javascript和PHP，并可以结合Smarty模板系统使用。">
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://xuplus.com/2007/06/25/php-e4-b8-adxajax-e5-ba-93-e4-b8-ad-e6-96-87-e9-97-ae-e9-a2-98-e5-8f-8a-e6-8f-90-e7-a4-ba-e8-bf-94-e5-9b-9exml-e6-96-87-e4-bb-b6-e6-97-a0-e6-95-88-e7-9a-84-e8-a7-a3-e5-86-b3-e5-8a-9e-e6-b3-95/index.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcss.com/sidr/2.2.1/jquery.sidr.min.js"></script>
+<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
+<script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
+<script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
+<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
+<script src="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
+<script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
+<link rel="stylesheet" href="/css/nova_font.css">
+<link rel="stylesheet" href="/css/bs/nova.css">
+
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Dominic.Xu&#039;s 博客">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- header -->
+  <header>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/aboutme/" class="main-nav">关于</a></li>
+        </ul>
+        <!-- search input -->
+        
+
+<!-- 百度站内搜索（已通过站点验证） -->
+<form class="navbar-form navbar-left" role="search"
+  action="//search.xuplus.com/cse/search">
+  <div class="form-group search">
+    <input type="text" name="q" id="bdcsMain" class="form-control primary" aria-label="..." placeholder="搜索">
+    <input type="hidden" name="s" value="16003826112187889004">
+    <input type="hidden" name="nsid" value="0">
+    <!-- 
+    <input name="tn" type="hidden" value="SE_zzsearchcode_shhzc78w">
+    <input name="cl" type="hidden" value="3">
+    <input name="ct" type="hidden" value="2097152">
+    <input name="si" type="hidden" value="ieclipse.cn">
+    <input name="ie" type="hidden" value="utf-8">
+    -->
+  </div>
+</form>
+
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </div>
+
+    <script>
+        <!-- mobile -->
+    	$('.navbar-toggle').sidr({
+	      name: 'sidr-main',
+	      source: '#bs-example-navbar-collapse-1'
+	    });
+    	$('body').click(function(){
+    	  $.sidr('close', 'sidr-main');
+    	});
+    	
+    	$(".navbar-fixed-top").autoHidingNavbar({
+    	  // see next for specifications
+    	});
+    </script>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+<div class="row">
+  <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    
+    
+    <article class="article post" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <div class="page-path"><span class="post-category"><span class="glyphicon glyphicon-folder-close" aria-hidden="true"></span>当前路径：<a class="category-item" href="/">文章</a><a class="category-item" href="/categories/PHP/">PHP</a></span></div>
+    <div class="divider"></div>
+      <h1 class="article-title" itemprop="name">PHP中xajax库中文问题及提示返回XML文件无效的解决办法</h1>
+    <div class="post-header clearfix">
+      <span class="post-date"><span class="hidden-xs icon nova-calendar">发表于</span>
+      <time datetime="2007-06-25T06:31:26.000Z" itemprop="datePublished"><time datetime="2007-06-25T06:31:26.000Z">2007-06-25</time></time>
+      </span>
+      <span class="post-tag"><i class="icon nova-tags"></i><span class="hidden-xs">标签</span><a class="tag-item" href="/tags/PHP/">PHP</a><a class="tag-item" href="/tags/中文/">中文</a><a class="tag-item" href="/tags/xajax/">xajax</a><a class="tag-item" href="/tags/编码/">编码</a></span>
+      <span class="post-share">
+        <a href="#share" class="icon nova-share"><span class="hidden-xs">分享</span><span class="jiathis_counter_style"></span></a>
+        <a href="#comment" class="icon nova-bubbles"><span class="ds-thread-count" data-thread-key="5cada1a53402943fcc438bb841e03ed1"></span><!-- <span class="hidden-xs">评论</span> --></a>
+        <a href="#like" class="icon nova-heart2-full"><span class="count"></span><span class="hidden-xs">喜欢</span></a>
+        <a href="#" class="icon nova-eye"><span class="count"></span><span class="hidden-xs">次阅读</span></a>
+      </span>
+    </div>
+    <div class="divider"></div>
+  </header>
+  <div class="article-content" itemprop="articleBody" id="post-content">
+    <p><span style="font-size: small;">xajax是PHP下一个非常好的ajax框架，虽然xajax自己说自己是一个库(Library)，但是我觉得它更像一个框架（Framework）。xajax是一个开源的 PHP 类库 它能够让你黏合HTML、CSS、Javascript和PHP，并可以结合Smarty模板系统使用。</span></p>
+<p><span style="font-size: small;">在运用Xoops的Page模组的时候，发现其不能和中文正常工作，特别是不能和UTF-8编码的页面一起工作，昨天在利用这个实现DataGrid的时候发现完全不能正常工作了，一直报“the XML response that was returned from the server is invalid”这个错误，Google了一下，发现不少人也有这个问题。结合之前解决Xoops的Page模组（感谢文明猪）的UTF-8使用问题的方法，终于发现了完美解决xajax库使用中文的方法。</span></p>
+<p><span style="font-size: small;">如果页面采用GB2312或GBK作为编码或字符集，一般网络上面提到的方法可以解决：需要注意的是common.php、server.php及server.php用到的php文件（特别是生成数据的文件）全部不要使用UTF-8编码格式保存而使用ASCII格式保存。同时server.php输出的数据内容最好也采用gb2312编码。<br>在common.php前面定义<br>define(‘XAJAX_DEFAULT_CHAR_ENCODING’,’GB2312’);<br>再在调用时使用：<br>$xajax = new xajax();<br>$xajax-&gt;decodeUTF8InputOn();<br>或者<br>$xajax = new xajax(‘gb2312’);<br>$xajax-&gt;setCharEncoding();<br>$xajax-&gt;decodeUTF8InputOn();<br>$objResponse = new xajaxResponse(‘gb2312’); </span></p>
+<p><span style="font-size: small;">如果页面采用UTF-8字符集的话，网上一些人说使用UTF-8格式编码就可以了，实际上即使全部使用UTF-8编码也不能正常工作，还是会报错：“the XML response that was returned from the server is invalid”。联想到之前在IE下碰到UTF-8 BOM Bug（文章：<a href="http://xuplus.com/article/2007/04/a6.html">IE下页面无端端空出一行及utf8页面无法显示的解决方法 </a>），会不会这个地方服务器传回的XML文件中也包含多个UTF-8 BOM内容呢？通过ethereal截获数据包发现，服务器返回的内容中还真是包含了多个UTF-8 BOM，可能还是IE使用的Microsoft XML Parser的UTF-8 BOM Bug吧。这样解决办法就出来了：所有页面全部采用UTF8编码并使用无UTF-8 BOM保存（UltraEdit 操作方法：F12或另存为界面中格式下拉框选择‘UTF-8－无 BOM’），页面包括xajax库文件、common.php文件、server.php文件。供访问的页面也可以使用无UTF-8 BOM保存。</span></p>
+<p><span style="font-size: small;">有时候返回的参数（特别是中文部分）被url编码了，这个时候需要我们将返回的数据使用Urldecode进行处理，以便能够正常完成后面的数据库操作。 </span></p>
+<p><span style="font-size: small;">最新xajax 0.25下载地址：<a href="http://prdownloads.sourceforge.net/xajax/xajax_0.2.5.zip?download" title="http://prdownloads.sourceforge.net/xajax/xajax_0.2.5.zip?download" target="_blank" rel="external">http://prdownloads.sourceforge.net/xajax/xajax_0.2.5.zip?download</a></span></p>
+<p><span style="font-size: small;">xajax中文手册（HonestQiao第一版，FlyingHail修改版） <a href="http://www.flyinghail.net/?p=44" target="_blank" rel="external">http://www.flyinghail.net/?p=44</a></span></p>
+<p><span style="font-size: small;">UTF-8 BOM解释：”EF BB BF” 这三个字节就叫BOM，BOM的全称叫做”Byte Order Mard”。在UTF-8文件中常用BOM来表明这个文件是UTF-8文件，而BOM的本意实在UTF-16中用来表示高低字节序列的。</span></p>
+<p><span style="font-size: small;">另外，PHP网站上说使用–enable-zend-multibyte可以解决这类问题，不过没有尝试，并且预计在PHP 6.0中会对Unicode做完美的支持。</span></p>
+
+  </div>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2016-09-28T06:31:18.379Z" itemprop="dateModified">
+        最后更新： <span class="red-text">2016-09-28</span>
+    </time>
+    
+  <!-- JiaThis Button BEGIN -->
+  <div class="jiathis_style clearfix"><a id="share" href="#share"></a>
+      <span class="jiathis_txt icon nova-share">分享：</span>
+      <a class="jiathis_button_tsina">微博</a>
+      <a class="jiathis_button_weixin">微信</a>
+      <a class="jiathis_button_twitter">推特</a>
+      <a class="jiathis_button_copy">复制网址</a>
+      <a class="jiathis_button_ishare">一键分享</a>
+      <a href="http://www.jiathis.com/share?uid=2115061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<!--       <a class="jiathis_counter_style"></a> -->
+  </div>
+  <!-- JiaThis Button END -->
+  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2115061" charset="utf-8" async="async"></script>
+
+  </footer>
+  <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+    <meta content="http://xuplus.com" itemprop="url">
+    <meta content="静勤居" itemprop="name">
+    <meta content="/image/logo.png" itemprop="logo">
+  </span>
+</article>
+<div>
+  <nav><ul class="pager"><li class="previous"><a href="/2007/06/25/xoops-e7-9a-84page-e6-a8-a1-e7-bb-84utf-8-e5-ad-97-e7-ac-a6-e7-bc-96-e7-a0-81-e4-b8-8b-e7-9a-84-e4-bd-bf-e7-94-a8-e6-96-b9-e6-b3-95/"><span aria-hidden="true">&larr;</span><span class="hidden-xs">XOOPS的Page模组UTF-8字符编码下的使用方法</span></a></li><li class="next"><a href="/2007/06/25/e3-80-8acss-e7-a6-85-e6-84-8f-e8-8a-b1-e5-9b-ad-e3-80-8b-e4-b8-80-e4-b9-a6-e4-b8-ad-e6-8f-90-e5-8f-8a-e7-9a-84-e6-9c-89-e7-94-a8-e9-93-be-e6-8e-a5/"><span aria-hidden="true">&rarr;</span><span class="hidden-xs">《CSS禅意花园》一书中提及的有用链接</span></a></li></ul></nav>
+  
+<!-- Button trigger modal -->
+<blockquote class="donate"><!--
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
+    打赏
+  </button>-->
+  <p>
+  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal"><img src="/image/donate_button.png">
+  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
+  </p>
+</blockquote>
+<!-- Modal -->
+<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">打赏</h4>
+      </div>
+      <div class="modal-body"><!--
+        <table>
+        <thead>
+          <th class="text-center">支付宝</th>
+          <th class="text-center">微信支付</th>
+        </thead>
+        <tr>
+          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
+        </tr>
+        </table>-->
+        <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">支付宝</span>
+            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="text-center">
+            <span style="display:block;">微信支付</span>
+            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+      </div>
+    </div>
+  </div>
+</div>
+  <a name="comment"></a>
+
+<!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="5cada1a53402943fcc438bb841e03ed1" data-title="PHP中xajax库中文问题及提示返回XML文件无效的解决办法" data-url="http://xuplus.com/2007/06/25/php-e4-b8-adxajax-e5-ba-93-e4-b8-ad-e6-96-87-e9-97-ae-e9-a2-98-e5-8f-8a-e6-8f-90-e7-a4-ba-e8-bf-94-e5-9b-9exml-e6-96-87-e4-bb-b6-e6-97-a0-e6-95-88-e7-9a-84-e8-a7-a3-e5-86-b3-e5-8a-9e-e6-b3-95/"></div>
+<!-- 多说评论框 end -->
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"xuplus"};
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0] 
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+<!-- 多说公共JS代码 end -->
+
+</div>
+
+    
+  </div>
+  <!-- aside -->
+  <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3">
+    <aside>
+    </aside>
+  </div>
+</div>
+</div>
+  <!-- footer -->
+  <footer id="footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2007-2016 <a href="http://ieclipse.cn/" target="_blank">Dominic Xu</a> powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <br/><br/>
+    </div>
+    <div>
+      <a href="http://www.miitbeian.gov.cn" target="_blank"></a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab" style="bottom: 45px; right: 24px;">
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="http://www.jiathis.com/share?uid=2115061" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+  </div>
+  <!-- after footer, some 3rd script place here -->
+    <script type="text/javascript">
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+    
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+<script type="text/javascript">
+(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=16003826112187889004' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
+</script>
+    
+<!-- LeanClound官方Javascript SDK -->
+<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+<script>
+  AV.init({
+    appId : 'sOAoHgViAW1ueMP6mQALndLv-gzGzoHsz',
+    appKey : 'XUI7wYifGxcGQQQY6WWLuaig'
+  });
+
+  var lc_config = {
+    pageId : '5cada1a53402943fcc438bb841e03ed1',
+    url : 'http://xuplus.com/2007/06/25/php-e4-b8-adxajax-e5-ba-93-e4-b8-ad-e6-96-87-e9-97-ae-e9-a2-98-e5-8f-8a-e6-8f-90-e7-a4-ba-e8-bf-94-e5-9b-9exml-e6-96-87-e4-bb-b6-e6-97-a0-e6-95-88-e7-9a-84-e8-a7-a3-e5-86-b3-e5-8a-9e-e6-b3-95/' || '2007/06/25/php-e4-b8-adxajax-e5-ba-93-e4-b8-ad-e6-96-87-e9-97-ae-e9-a2-98-e5-8f-8a-e6-8f-90-e7-a4-ba-e8-bf-94-e5-9b-9exml-e6-96-87-e4-bb-b6-e6-97-a0-e6-95-88-e7-9a-84-e8-a7-a3-e5-86-b3-e5-8a-9e-e6-b3-95/',
+    title : 'PHP中xajax库中文问题及提示返回XML文件无效的解决办法'
+  };
+  
+  var lc_table = 'Counter' || 'Counter';
+
+  (function() {
+    var query = new AV.Query(lc_table);
+    query.select(['-ACL']);
+    query.equalTo('pageId', lc_config.pageId);
+    query.first({
+      success: function(results) {
+        // results is an array of AV.Object.
+        if (typeof results === 'undefined') {
+          insert(results);
+          return;
+        }
+        console.log(results._serverData);
+        update(results);
+        show(results);
+      },
+      error: function(error) {
+        // error is an instance of AV.Error.
+        console.log(error);
+      }
+    });
+
+    function insert(data) {
+      if (!data) {
+        console.log('data is null new object');
+        var M = AV.Object.extend(lc_table);
+        data = new M();
+        data.set('views', 1);
+      }
+      for ( var key in lc_config) {
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log('created objectId is ' + data.id);
+      }, function(error) {
+        console.log("create object failed");
+        console.log(error);
+      });
+    }
+
+    function update(data) {
+      data.increment('views', 1);
+      for ( var key in lc_config) {
+        if (key !== 'pageId')
+        data.set(key, lc_config[key]);
+      }
+      data.save().then(function(data) {
+        console.log("update to " + data.get('views'));
+      }, function(error) {
+        console.log("update object failed");
+        console.log(error);
+      });
+    }
+    
+    function show(data) {
+      $(".post-share .nova-eye .count").html(data.get('views'));
+    }
+  })();
+</script>
+
+</body>
+</html>
