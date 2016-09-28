@@ -21,23 +21,7 @@
   <link rel="canonical" href="http://xuplus.com/aboutme/index.html">
   <!-- Alternative links -->
   <!-- CSS and JS-->
-  <script src="//cdn.bootcss.com/jquery/2.2.0/jquery.min.js"></script>
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css">
-<link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
-<script src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-<script src="//cdn.bootcss.com/sidr/2.2.1/jquery.sidr.min.js"></script>
-<script src="/js/jquery.bootstrap-autohidingnavbar.min.js"></script>
-<link rel="stylesheet" href="//cdn.bootcss.com/sidr/2.2.1/stylesheets/jquery.sidr.dark.min.css">
-<link rel="stylesheet" href="//cdn.bootcss.com/highlight.js/9.2.0/styles/github.min.css">
-<script src="//cdn.bootcss.com/highlight.js/9.2.0/highlight.min.js"></script>
-<script src="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.pack.js"></script>
-<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/jquery.fancybox.min.css">
-<link rel="stylesheet" href="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.css">
-<script src="//cdn.bootcss.com/fancybox/2.1.5/helpers/jquery.fancybox-buttons.js"></script>
-<script src="//cdn.bootcss.com/zclip/1.1.2/jquery.zclip.min.js"></script>
-<link rel="stylesheet" href="/css/nova_font.css">
-<link rel="stylesheet" href="/css/bs/nova.css">
-
+  
   <!-- RSS -->
   <link rel="alternate" href="/atom.xml" title="Dominic.Xu&#039;s 博客">
   <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
@@ -60,20 +44,21 @@
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
-        <li><a href="/" class="main-nav">首页</a></li><li><a href="/p/" class="main-nav">项目</a></li><li><a href="/categories/" class="main-nav">分类</a></li><li><a href="/archives/" class="main-nav">归档</a></li><li><a href="/donate/" class="main-nav">捐赠墙</a></li><li><a href="/aboutme/" class="main-nav">关于</a></li>
+        
         </ul>
         <!-- search input -->
         
 
-<!-- 百度站内搜索（已通过站点验证） -->
-<form class="navbar-form navbar-left" role="search"
-  action="//search.xuplus.com/cse/search">
-  <div class="form-group search">
-    <input type="text" name="q" id="bdcsMain" class="form-control primary" aria-label="..." placeholder="搜索">
-    <input type="hidden" name="s" value="16003826112187889004">
-    <input type="hidden" name="nsid" value="0">
-
-  </div>
+<!--  百度搜索极速体验版，任意站点都可以用 -->
+<!--首先请将form表单action属性改写为如下所示-->
+<form target="_blank" action="http://zhannei.baidu.com/cse/site">
+  <!--请保证您的输入框input标签name值为"q"-->
+  <input type="text" name="q" size="30">
+  <!--请为您的form表单添加如下一行代码，并将value值改写为您网站的主域-->
+  <input type="hidden" name="cc" value="">
+  <!--如果您网站是gbk编码，请添加如下一行代码；如果为utf-8编码，则不需要添加-->
+  <!--<input type="hidden" name="ie" value="gbk">-->
+  <!-- input type="submit" value="搜索"> -->
 </form>
 
         <ul class="nav navbar-nav navbar-right">
@@ -102,7 +87,7 @@
   
 <div class="container container-fluid">
   <div class="row">
-    <div class="col-sx-12 col-sm-8 col-md-9 col-lg-9">
+    <div class="">
       <article class="article page" itemscope="itemscope" itemtype="http://schema.org/Article">
   <header class="article-header">
     <h1 class="article-title" itemprop="name headline">
@@ -162,92 +147,22 @@
       <a class="jiathis_button_twitter">推特</a>
       <a class="jiathis_button_copy">复制网址</a>
       <a class="jiathis_button_ishare">一键分享</a>
-      <a href="http://www.jiathis.com/share?uid=2115061" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+      <a href="http://www.jiathis.com/share?uid=" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
 <!--       <a class="jiathis_counter_style"></a> -->
   </div>
   <!-- JiaThis Button END -->
-  <script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=2115061" charset="utf-8" async="async"></script>
+  <script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8" async="async"></script>
 
   </footer>
 </article>
 <div>
   <nav></nav>
   
-<!-- Button trigger modal -->
-<blockquote class="donate"><!--
-  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#DonateModal">
-    打赏
-  </button>-->
-  <p>
-  <a href="#" role="button" data-toggle="modal" data-target="#DonateModal"><img src="/image/donate_button.png">
-  <span>各位看官，鄙人借网络这块宝地在此献丑，望有钱的捧个钱场（打赏任意金额），没钱的捧个人场（分享）</span></a>
-  </p>
-</blockquote>
-<!-- Modal -->
-<div class="modal fade" id="DonateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">打赏</h4>
-      </div>
-      <div class="modal-body"><!--
-        <table>
-        <thead>
-          <th class="text-center">支付宝</th>
-          <th class="text-center">微信支付</th>
-        </thead>
-        <tr>
-          <td><img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="img-rounded donate" width="200" height="200"></td>
-          <td><img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="img-rounded donate" width="200" height="200"></td>
-        </tr>
-        </table>-->
-        <div class="container-fluid">
-        <div class="row">
-        <div class="col-md-6">
-          <div class="text-center">
-            <span style="display:block;">支付宝</span>
-            <img src="/image/donate_alipay.png" alt="使用支付宝扫码打赏" class="donate" />
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="text-center">
-            <span style="display:block;">微信支付</span>
-            <img src="/image/donate_wechat.png" alt="使用微信扫码打赏" class="donate" />
-          </div>
-        </div>
-        </div>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-      </div>
-    </div>
-  </div>
-</div>
   <a name="comment"></a>
-
-<!-- 多说评论框 start -->
-    <div class="ds-thread" data-thread-key="e6ae84f16481f2387aac639b68efeda9" data-title="关于" data-url="http://xuplus.com/aboutme/index.html"></div>
-<!-- 多说评论框 end -->
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-var duoshuoQuery = {short_name:"xuplus"};
-    (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0] 
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
-    })();
-    </script>
-<!-- 多说公共JS代码 end -->
-
 </div>
 
     </div>
-    <div class="col-sx-12 col-sm-4 col-md-3 col-lg-3 hidden-xs">
+    <div class="">
       <div id="navbar-toc">
       <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
         <h3 class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
@@ -282,7 +197,7 @@ var duoshuoQuery = {short_name:"xuplus"};
   <div class="fab" style="bottom: 45px; right: 24px;">
     <ul class="top-expand" id="top-expand">
       <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
-      <li><a class="fab-item large yellow " href="http://www.jiathis.com/share?uid=2115061" target="_blank"><i class="icon nova-share"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=" target="_blank"><i class="icon nova-share"></i></a></li>
     </ul>
     <a class="fab-item large red " onclick="$('#top-expand').toggle();">
       <i class="icon nova-list-ul"></i>
@@ -299,7 +214,6 @@ var duoshuoQuery = {short_name:"xuplus"};
     <script src="/js/hljs.js"></script>
     <script src="/js/script.js"></script>
     
-
     <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
 <script>
 (function(){
@@ -318,84 +232,7 @@ var duoshuoQuery = {short_name:"xuplus"};
 
     
     <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
-<script type="text/javascript">
-(function(){document.write(unescape('%3Cdiv id="bdcs"%3E%3C/div%3E'));var bdcs = document.createElement('script');bdcs.type = 'text/javascript';bdcs.async = true;bdcs.src = 'http://znsv.baidu.com/customer_search/api/js?sid=16003826112187889004' + '&plate_url=' + encodeURIComponent(window.location.href) + '&t=' + Math.ceil(new Date()/3600000);var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(bdcs, s);})();
-</script>
     
-<!-- LeanClound官方Javascript SDK -->
-<script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
-<script>
-  AV.init({
-    appId : 'sOAoHgViAW1ueMP6mQALndLv-gzGzoHsz',
-    appKey : 'XUI7wYifGxcGQQQY6WWLuaig'
-  });
-
-  var lc_config = {
-    pageId : 'e6ae84f16481f2387aac639b68efeda9',
-    url : 'http://xuplus.com/aboutme/index.html' || 'aboutme/index.html',
-    title : '关于'
-  };
-  
-  var lc_table = 'Counter' || 'Counter';
-
-  (function() {
-    var query = new AV.Query(lc_table);
-    query.select(['-ACL']);
-    query.equalTo('pageId', lc_config.pageId);
-    query.first({
-      success: function(results) {
-        // results is an array of AV.Object.
-        if (typeof results === 'undefined') {
-          insert(results);
-          return;
-        }
-        console.log(results._serverData);
-        update(results);
-        show(results);
-      },
-      error: function(error) {
-        // error is an instance of AV.Error.
-        console.log(error);
-      }
-    });
-
-    function insert(data) {
-      if (!data) {
-        console.log('data is null new object');
-        var M = AV.Object.extend(lc_table);
-        data = new M();
-        data.set('views', 1);
-      }
-      for ( var key in lc_config) {
-        data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
-        console.log('created objectId is ' + data.id);
-      }, function(error) {
-        console.log("create object failed");
-        console.log(error);
-      });
-    }
-
-    function update(data) {
-      data.increment('views', 1);
-      for ( var key in lc_config) {
-        if (key !== 'pageId')
-        data.set(key, lc_config[key]);
-      }
-      data.save().then(function(data) {
-        console.log("update to " + data.get('views'));
-      }, function(error) {
-        console.log("update object failed");
-        console.log(error);
-      });
-    }
-    
-    function show(data) {
-      $(".post-share .nova-eye .count").html(data.get('views'));
-    }
-  })();
-</script>
 
 </body>
 </html>
