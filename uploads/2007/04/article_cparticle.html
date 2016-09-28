@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh" prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# object: http://ogp.me/ns/object# article: http://ogp.me/ns/article# profile: http://ogp.me/ns/profile#">
+<head>
+  <meta charset="utf-8">
+  <title>Dominic.Xu&#039;s 博客</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="keywords" content="">
+  <meta name="description" content="Dominic.Xu&#039;s 技术文章博客.">
+  
+
+  <meta name="og:type" content="website">
+  <meta name="og:site_name" content="Dominic.Xu&#039;s 博客">
+  <meta name="og:image" content="http://xuplus.com/image/logo.png">
+  <meta name="og:title" content="">
+  <meta name="og:url" content="http://xuplus.com/uploads/2007/04/article_cparticle.html">
+  <meta name="og:description" content="Dominic.Xu&#039;s 技术文章博客.">
+
+
+  <!-- Canonical links -->
+  <link rel="canonical" href="http://xuplus.com/uploads/2007/04/article_cparticle.html">
+  <!-- Alternative links -->
+  <!-- CSS and JS-->
+  
+  <!-- RSS -->
+  <link rel="alternate" href="/atom.xml" title="Dominic.Xu&#039;s 博客">
+  <link rel="shortcut icon" href="/image/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+  <!-- header -->
+  <header>
+  <nav id="main-nav" class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse_" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" id="logo"><img src="/image/logo.png" height="50"></a>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+        
+        </ul>
+        <!-- search input -->
+        
+
+<!--  百度搜索极速体验版，任意站点都可以用 -->
+<!--首先请将form表单action属性改写为如下所示-->
+<form target="_blank" action="http://zhannei.baidu.com/cse/site">
+  <!--请保证您的输入框input标签name值为"q"-->
+  <input type="text" name="q" size="30">
+  <!--请为您的form表单添加如下一行代码，并将value值改写为您网站的主域-->
+  <input type="hidden" name="cc" value="">
+  <!--如果您网站是gbk编码，请添加如下一行代码；如果为utf-8编码，则不需要添加-->
+  <!--<input type="hidden" name="ie" value="gbk">-->
+  <!-- input type="submit" value="搜索"> -->
+</form>
+
+        <ul class="nav navbar-nav navbar-right">
+        </ul>
+      </div>
+    </div>
+
+    <script>
+        <!-- mobile -->
+    	$('.navbar-toggle').sidr({
+	      name: 'sidr-main',
+	      source: '#bs-example-navbar-collapse-1'
+	    });
+    	$('body').click(function(){
+    	  $.sidr('close', 'sidr-main');
+    	});
+    	
+    	$(".navbar-fixed-top").autoHidingNavbar({
+    	  // see next for specifications
+    	});
+    </script>
+  </nav>
+</header>
+
+  <!-- main -->
+  
+<div class="container container-fluid">
+  <div class="row">
+    <div class="">
+      <article class="article page" itemscope="itemscope" itemtype="http://schema.org/Article">
+  <header class="article-header">
+    <h1 class="article-title" itemprop="name headline">
+      
+    </h1>
+    <meta content="2016-09-28T10:37:32.182Z" itemprop="datePublished">
+  </header>
+  <div class="article-content" itemprop="articleBody">
+  
+    <!-- phppp (D.J.): http://xoopsforge.com; http://xoops.org.cn -->
+
+<div class="article-breadcrumbs-header head">
+	<{if count($tracks)="">0}>
+		<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?from=<{$from}>"><{$modulename}> <{php}>echo art_constant("MD_CPARTICLE");<{ php}=""></{></{php}></{$modulename}></a>
+		<{foreachq item="track" from="$tracks}">
+		 :: <a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?category=<{$track.id}>&amp;from=<{$from}>"><{$track.title}></{$track.title}></a>
+		<{ foreach}="">
+	<{else}>
+		<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/index.php"><{$modulename}></{$modulename}></a>
+	<{ if}="">
+	 :: <{php}>echo art_constant("MD_CPARTICLE");<{ php}="">
+</{></{php}></{></{else}></{></{foreachq></{if></div>
+
+<div class="article-section article-article list-article" style="margin-top:10px"><!--�������ˣ��������ı�������-->
+<!-- article header data -->
+<div class="article-section article-header article-func-button">
+	<{if $topic}="">
+		<h2 class="article-title">
+			<span><strong><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.topic.php<{$smarty.const.URL_DELIMITER}><{$topic.id}>"><{$topic.title}></{$topic.title}></a></strong></span> 
+			<span>(<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/edit.topic.php?topic=<{$topic.id}>&amp;from=<{$from}>"><{$smarty.const._edit}></{$smarty.const._edit}></a>)</span>
+		</h2>
+		<div class="article-list">
+			<{php}>echo art_constant("MD_DESCRIPTION");<{ php}="">: <{$topic.desctiption}><br>
+			<{php}>echo art_constant("MD_ARTICLES");<{ php}="">: <{$topic.articles}>
+		</{$topic.articles}></{></{php}></{$topic.desctiption}></{></{php}></div>
+	<{elseif $category}="">
+		<h2 class="article-title">
+			<span><strong><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}><{$category.id}>"><{$category.title}></{$category.title}></a></strong></span> 
+			<span>(<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/edit.category.php?category=<{$category.id}>"><{$smarty.const._edit}></{$smarty.const._edit}></a>)</span>
+		</h2>
+		<div class="article-list">
+			<{php}>echo art_constant("MD_DESCRIPTION");<{ php}="">: <{$category.desctiption}><br>
+			<{php}>echo art_constant("MD_ARTICLES");<{ php}=""> (<{$type_name}>): <{$category.articles}>
+		</{$category.articles}></{$type_name}></{></{php}></{$category.desctiption}></{></{php}></div>
+	<{ if}="">
+	
+	<div class="article-list">
+		<{if $category}="">
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?category=<{$category.id}>&amp;topic=<{$topic.id}>&amp;type=registered&amp;from=<{$from}>"><{php}>echo art_constant("MD_REGISTERED");<{ php}=""></{></{php}></a></span>
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?category=<{$category.id}>&amp;topic=<{$topic.id}>&amp;type=published&amp;from=<{$from}>"><{php}>echo art_constant("MD_PUBLISHED");<{ php}=""></{></{php}></a></span>
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?category=<{$category.id}>&amp;topic=<{$topic.id}>&amp;type=featured&amp;from=<{$from}>"><{php}>echo art_constant("MD_FEATURED");<{ php}=""></{></{php}></a></span>
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?category=<{$category.id}>&amp;topic=<{$topic.id}>&amp;type=all&amp;from=<{$from}>"><{$smarty.const._all}></{$smarty.const._all}></a>
+		<{elseif $topic="=NULL}">
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?type=submitted&amp;from=<{$from}>"><{php}>echo art_constant("MD_SUBMITTED");<{ php}=""></{></{php}></a></span>
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?type=registered&amp;from=<{$from}>"><{php}>echo art_constant("MD_REGISTERED");<{ php}=""></{></{php}></a></span>
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?type=published&amp;from=<{$from}>"><{php}>echo art_constant("MD_PUBLISHED");<{ php}=""></{></{php}></a></span>
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?type=featured&amp;from=<{$from}>"><{php}>echo art_constant("MD_FEATURED");<{ php}=""></{></{php}></a></span>
+			<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?type=all&amp;from=<{$from}>"><{$smarty.const._all}></{$smarty.const._all}></a>
+		<{ if}="">
+	</{></span></{elseif></span></{if></div>
+</{></{elseif></{if></div>
+
+<{if count($articles)="">0}>
+<div>
+<form name="form_article_cpanel" action="am.article.php" method="POST">
+
+	<div class="article-section article-title">
+			<{php}>echo art_constant("MD_ARTICLE");<{ php}=""> (<{$type_name}>)
+		</{$type_name}></{></{php}></div>
+		
+		
+		<table class="article-section-container">
+		<tr style="text-align:center">
+			<td>&nbsp;</td>
+			<td width="40%"><{php}>echo art_constant("MD_TITLE");<{ php}=""></{></{php}></td>
+			<{if $category.id="=0}">
+			<td><{php}>echo art_constant("MD_CATEGORY");<{ php}=""></{></{php}></td>
+			<{ if}="">
+			<td><{php}>echo art_constant("MD_AUTHOR");<{ php}=""></{></{php}></td>
+			<{if $topic}="">
+			<td>
+				<{php}>echo art_constant("MD_PUBLISH");<{ php}="">
+      </{></{php}></td>
+			<{else}>
+		  <td>
+					<{php}>echo art_constant("MD_SUBMISSION");<{ php}="">
+			</{></{php}></td>
+      <td>			
+				<{php}>echo art_constant("MD_REGISTER");<{ php}="">
+			</{></{php}></td>
+			<td>
+					<{php}>echo art_constant("MD_PUBLISH");<{ php}="">
+			</{></{php}></td>
+			<td>
+					<{php}>echo art_constant("MD_FEATURE");<{ php}="">
+			</{></{php}></td>
+			<{ if}="">
+			<td><{php}>echo art_constant("MD_ACTIONS");<{ php}=""></{></{php}></td>
+			<td><{$smarty.const._select}></{$smarty.const._select}></td>
+		</{></{else}></{if></{></{if></tr>
+		<{foreachq item="article" from="$articles" name="art" }="">
+		<tr style="padding-top: 0px;">
+			<td><{$smarty.foreach.art.iteration}>.</{$smarty.foreach.art.iteration}></td>
+			<td>
+				<strong><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.article.php<{$smarty.const.URL_DELIMITER}>c<{$article.category.id}>/<{$article.id}>" title="<{$article.summary}>" target="<{$article.id}>"><{$article.title}></{$article.title}></a></strong>
+			</td>
+		
+			<{if $category.id="=0}">
+			<td>
+			<{if $article.category.title}="">
+				<a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/view.category.php<{$smarty.const.URL_DELIMITER}><{$article.category.id}>" target="<{$article.id}>"><{$article.category.title}></{$article.category.title}></a><{if $article.cat_id="" eq="" $article.category.id}=""> <strong>(*)</strong><{ if}="">
+					<{else}>&nbsp;
+				<{ if}="">
+			</{></{else}></{></{if></{if></td>
+			<{ if}="">
+		
+		  <td>
+				<{$article.author}>
+			</{$article.author}></td>
+
+
+			<{if $topic}="">
+			<td>
+				<{$article.time_topic}>
+      </{$article.time_topic}></td>
+			<{else}>
+		  <td>
+			 <{$article.submit}>
+			</{$article.submit}></td>
+      <td>			
+				<{$article.register_category}>
+			</{$article.register_category}></td>
+			<td>
+	    <{if $article.publish_category}="">
+				<{$article.publish_category}>
+					<{else}>&nbsp;
+			<{ if}="">
+			</{></{else}></{$article.publish_category}></{if></td>
+			<td>
+			<{if $article.feature_category}="">
+					<{$article.feature_category}>
+					<{else}>&nbsp;
+				<{ if}="">
+			</{></{else}></{$article.feature_category}></{if></td>
+			<{ if}="">
+
+			
+
+		<td>	
+			<div class="article-list" style="text-align: right; ">
+				<span class="article-button2"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.article.php?op=terminate&amp;article=<{$article.id}>&amp;category=<{$article.category.id}>&amp;topic=<{$topic.id}>&amp;from=<{$from}>"><{php}>echo art_constant("MD_TERMINATE");<{ php}=""></{></{php}></a></span>
+				<{if $topic.id="=0}">
+					<{if $article.admin}="">
+						<span class="article-button2"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/edit.article.php?article=<{$article.id}>"><{$smarty.const._edit}></{$smarty.const._edit}></a></span>
+					<{ if}="">
+					<{if $article.publish_category="" eq="" ""="" or="" $article.publish="" ""}="">
+						<span class="article-button2"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.article.php?op=approve&amp;article=<{$article.id}>&amp;category=<{$article.category.id}>&amp;from=<{$from}>"><{php}>echo art_constant("MD_APPROVE");<{ php}=""></{></{php}></a></span>
+					<{ if}="">
+					<{if $article.feature_category}="">
+						<span class="article-button2"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.article.php?op=unfeature&amp;article=<{$article.id}>&amp;category=<{$article.category.id}>&amp;from=<{$from}>"><{php}>echo art_constant("MD_UNFEATUREIT");<{ php}=""></{></{php}></a></span>
+					<{elseif $article.publish_category}="">
+						<span class="article-button2"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.article.php?op=feature&amp;article=<{$article.id}>&amp;category=<{$article.category.id}>&amp;from=<{$from}>"><{php}>echo art_constant("MD_FEATUREIT");<{ php}=""></{></{php}></a></span>
+					<{ if}="">
+					<{if $type="" eq="" "featured"}="">
+						<span class="article-button2"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.article.php?op=update_time&type=featured&amp;article=<{$article.id}>&amp;category=<{$article.category.id}>&amp;from=<{$from}>"><{php}>echo art_constant("MD_UPDATE_TIME");<{ php}=""></{></{php}></a></span>
+					<{elseif $type="" eq="" "published"}="">
+						<span class="article-button2"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.article.php?op=update_time&amp;article=<{$article.id}>&amp;category=<{$article.category.id}>&amp;from=<{$from}>"><{php}>echo art_constant("MD_UPDATE_TIME");<{ php}=""></{></{php}></a></span>
+					<{ if}="">
+					<{if $article.admin="" and="" $article.publish_category}="">
+						<span class="article-button2"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/am.article.php?op=rate&amp;article=<{$article.id}>&amp;from=<{$from}>"><{php}>echo art_constant("MD_RESETRATE");<{ php}=""></{></{php}></a></span> <!-- reset rating data -->
+					<{ if}="">
+				<{ if}="">
+				</{></{></{if></{></{elseif></{if></{></{elseif></{if></{></{if></{></{if></{if></div></td>
+			<td>
+				<span><input type="checkbox" name="art_id[<{$article.id}>]" id="art_id[]" value="1"></span>
+		  </td>
+			</{></{else}></{if></{></{if></tr></{foreachq></table></form></div>
+			<div class="clear"></div>
+			
+		<{ foreach}="">
+		
+		
+<div class="clear"></div>
+
+<div style="height;100px;">
+	
+
+	<div class="article-list" style="float: right; text-align: right; padding-top: 10px">
+		<input type="hidden" name="category" value="<{$category.id}>">
+		<input type="hidden" name="topic" value="<{$topic.id}>">
+		<input type="hidden" name="start" value="<{$start}>">
+		<input type="hidden" name="type" value="<{$type}>">
+		<input type="hidden" name="from" value="<{$from}>">
+		<span><input type="submit" name="submit" value="<{$smarty.const._SUBMIT}>"></span>
+		<span><input type="reset" value="<{$smarty.const._CANCEL}>"></span>
+		<br>
+	</div>
+	
+		<div class="article-section article-actions" style="float: right; text-align: right; padding-top: 10px">
+		<div class="article-list">
+			<{$smarty.const._select}><{$smarty.const._all}>: <input type="checkbox" name="art_check" id="art_check" value="1" onclick="xoopsCheckAll('form_article_cpanel', 'art_check', 'art_id[]');">
+			<{php}>echo art_constant("MD_ACTIONS");<{ php}="">:
+			<select 0="" name="op" <{if="" $category.id="" gt="" and="" count($topics)="">0}>
+					onChange="if(this.options[this.selectedIndex].value=='registertopic'){setVisible('div_topic');}else{setHidden('div_topic');}"
+				<{ if}="">
+			>
+				<option value=""><{$smarty.const._select}></{$smarty.const._select}></option>
+				
+				<{if $category.id="" gt="" 0}="">
+					<{if $type="" eq="" "submitted"="" or="" "registered"}="">
+						<option value="approve"><{php}>echo art_constant("MD_APPROVE");<{ php}=""></{></{php}></option>
+					<{ if}="">
+					<{if $type="" eq="" "published"}="">
+						<option value="feature"><{php}>echo art_constant("MD_FEATUREIT");<{ php}=""></{></{php}></option>
+						<option value="update_time"><{php}>echo art_constant("MD_UPDATE_TIME");<{ php}=""></{></{php}></option>
+					<{ if}="">
+					<{if $type="" eq="" "featured"}="">
+						<option value="unfeature"><{php}>echo art_constant("MD_UNFEATUREIT");<{ php}=""></{></{php}></option>
+						<option value="update_time"><{php}>echo art_constant("MD_UPDATE_TIME");<{ php}=""></{></{php}></option>
+					<{ if}="">
+					<{if count($topics)="">0}>
+						<option value="registertopic"><{php}>echo art_constant("MD_REGISTERTOPIC");<{ php}=""></{></{php}></option>
+					<{ if}="">
+				<{ if}="">
+				
+				<{if 0="" $category.id="" gt="" or="" $topic.id="" 0}="">
+					<option value="terminate"><{php}>echo art_constant("MD_TERMINATE");<{ php}=""></{></{php}></option>
+				<{ if}="">
+				
+				<{if $topic="" eq="" null}="">
+					<option value="rate"><{php}>echo art_constant("MD_RESETRATE");<{ php}=""></{></{php}></option>
+				<{ if}="">
+				
+			</{></{if></{></{if></{></{></{if></{></{if></{></{if></{></{if></{if></{></select>
+			
+			<{if 0="" $category.id="" gt="" and="" count($topics)="">0}>
+				<div id="div_topic" style="visibility:hidden; display:inline;">
+				<select name="top_id">
+					<{foreachq item="top" from="$topics}">
+					<option value="<{$top.id}>"><{$top.title}></{$top.title}></option>
+					<{ foreach}="">
+				</{></{foreachq></select>
+				</div>
+			<{ if}="">
+			
+		</{></{if></{></{php}></{$smarty.const._all}></{$smarty.const._select}></div>
+	</div>
+
+</div>
+<br>
+<div class="clear"></div>
+
+<{ if}="">
+
+<div id="pagenav" class="article-section pagenav">
+	<{$pagenav}>
+</{$pagenav}></div>
+
+<{if $categories}="">
+<div class="article-section article-categories">
+	<div class="article-title">
+		<{php}>echo art_constant("MD_CATEGORY");<{ php}="">
+	</{></{php}></div>
+	
+	<div class="article-list">
+	<{foreachq item="cat" from="$categories}">
+		<span class="article-button"><a href="<{$xoops_url}>/modules/<{$xoops_dirname}>/cp.article.php?category=<{$cat.id}>&amp;from=<{$from}>"><{$cat.title}></{$cat.title}></a></span> 
+	<{ foreach}="">
+	</{></{foreachq></div>
+</div>
+<{ if}="">
+
+<{if $topics}="">
+<div class="article-section article-topics">
+	<div class="article-title">
+		<{php}>echo art_constant("MD_TOPIC");<{ php}="">
+	</{></{php}></div>
+	<div class="article-list">
+		<{foreachq item="top" from="$topics}">
+			<span class="article-button><a href=" <{$xoops_url}="">/modules/<{$xoops_dirname}>/cp.article.php?topic=<{$top.id}>&amp;from=<{$from}>"><{$top.title}></{$top.title}></{$from}></{$top.id}></{$xoops_dirname}></span> 
+		<{ foreach}="">
+	</{></{foreachq></div>
+</div>
+<{ if}="">
+</{></{if></{></{if></{></{></{if></div><!--��190���ƴˣ�����������������-->
+
+  
+  </div>
+  <footer class="article-footer">
+    <time class="article-footer-updated" datetime="2010-11-08T10:00:40.000Z" itemprop="dateModified">
+    最后更新：2010-11-08
+    </time>
+    <span itemprop="author publisher" itemscope="itemscope" itemtype="http://schema.org/Organization">
+      <meta content="http://xuplus.com" itemprop="url">
+      <meta content="Dominic.Xu&#039;s 博客" itemprop="name">
+      <meta content="/image/logo.png" itemprop="logo">
+    </span>
+    
+  <!-- JiaThis Button BEGIN -->
+  <div class="jiathis_style clearfix"><a id="share" href="#share"></a>
+      <span class="jiathis_txt icon nova-share">分享：</span>
+      <a class="jiathis_button_tsina">微博</a>
+      <a class="jiathis_button_weixin">微信</a>
+      <a class="jiathis_button_twitter">推特</a>
+      <a class="jiathis_button_copy">复制网址</a>
+      <a class="jiathis_button_ishare">一键分享</a>
+      <a href="http://www.jiathis.com/share?uid=" class="jiathis jiathis_txt jiathis_separator jtico jtico_jiathis" target="_blank">更多</a>
+<!--       <a class="jiathis_counter_style"></a> -->
+  </div>
+  <!-- JiaThis Button END -->
+  <script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=" charset="utf-8" async="async"></script>
+
+  </footer>
+</article>
+<div>
+  <nav></nav>
+  
+  <a name="comment"></a>
+</div>
+
+    </div>
+    <div class="">
+      <div id="navbar-toc">
+      <nav id="toc" class="hidden-print hidden-xs hidden-sm" data-spy="affix">
+        <h3 class="toc-title"><a role="button" data-toggle="collapse" href="#toc-body" aria-expanded="true">
+          目录
+        </a></h3>
+        <div id="toc-body" class="in">
+        <ul class="nav toc-ul"><li><a>
+			 
+			()
+		</a></li><li><a>
+			 
+			()
+		</a></li></ul>
+        </div>
+      </nav>
+</div>
+    </div>
+  </div><!--  end row -->
+</div>
+
+  <!-- footer -->
+  <footer id="footer">
+  <div class="divider"></div>
+  <div>&nbsp;</div>
+  <div class="inner text-center">
+    <div id="footer-copyright">
+      &copy; 2007-2016 <a href="http://xuplus.com/" target="_blank">Dominic Xu</a> Powered by <a href="http://hexo.io" target="_blank">Hexo</a> Theme <a href="https://github.com/Jamling/hexo-theme-nova" target="_blank">Nova</a><br>
+      <br/><br/>
+    </div>
+    <div>
+      <a href="http://www.miitbeian.gov.cn" target="_blank"></a>
+    </div>
+  </div>
+</footer>
+
+  <!-- fixed action bar -->
+  
+  <div class="fab" style="bottom: 45px; right: 24px;">
+    <ul class="top-expand" id="top-expand">
+      <li><a class="fab-item large red" href="#top"><i class="icon nova-top"></i></a></li>
+      <li><a class="fab-item large yellow " href="//www.jiathis.com/share?uid=" target="_blank"><i class="icon nova-share"></i></a></li>
+    </ul>
+    <a class="fab-item large red " onclick="$('#top-expand').toggle();">
+      <i class="icon nova-list-ul"></i>
+    </a>
+  </div>
+  <!-- after footer, some 3rd script place here -->
+    <script type="text/javascript">
+    var hljs_labels = {
+        left: "代码",
+        right: "如下：",
+        copy: "复制"
+    }
+    </script>
+    <script src="/js/hljs.js"></script>
+    <script src="/js/script.js"></script>
+    
+    <!-- 安装自动推送JS代码的网页，在页面被访问时，页面URL将立即被推送给百度 -->
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+    
+    <!-- 新建的搜索框代码，建立使用你自己的代码替换-->
+    
+
+</body>
+</html>
